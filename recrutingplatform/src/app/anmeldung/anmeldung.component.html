@@ -1,1 +1,58 @@
-<p>anmeldung works!</p>
+<header class="fixed-header">
+    <nav>
+        <ul>
+            <li><a routerLink="/">Start</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Stellenportal Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- E-Mail-Feld -->
+        <div class="form-group">
+            <label for="email">E-Mail:</label>
+            <input type="email" formControlName="email" id="email" required>
+            <div *ngIf="loginForm.get('email')?.touched">
+                <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['required']">
+                    E-Mail ist erforderlich.
+                </small>
+                <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['email']">
+                    Bitte eine gültige E-Mail angeben.
+                </small>
+            </div>
+        </div>
+
+        <!-- Passwort-Feld -->
+        <div class="form-group">
+            <label for="password">Passwort:</label>
+            <input type="password" formControlName="password" id="password" required>
+            <div *ngIf="loginForm.get('password')?.touched">
+                <small class="text-danger" *ngIf="loginForm.get('password')?.errors?.['required']">
+                    Passwort ist erforderlich.
+                </small>
+            </div>
+        </div>
+        
+        <!-- Toggle-->
+        <div class="toggle-container">
+            <input type="checkbox" id="toggle-button" (change)="toggleRole()" [checked]="isRecruiter">
+            <label for="toggle-button" class="toggle-label">
+                <span class="toggle-slider">
+                    <span class="slider-text">{{ isRecruiter ? 'Recruiter' : 'Bewerber' }}</span>
+                </span>
+            </label>
+        </div>
+        <div id ='buttonGroup'>
+          <button type="submit" [disabled]="loginForm.invalid">Anmelden</button>
+          <button routerLink="/registrierung">Registrieren</button>
+          
+        </div>
+    </form>
+    
+</section>
+
+
+<footer>
+    <p>&copy; 2024 Unternehmensname. Alle Rechte vorbehalten.</p>
+</footer>
