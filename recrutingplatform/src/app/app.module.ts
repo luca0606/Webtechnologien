@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { StartseiteComponent } from './startseite/startseite.component';
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
+import { ReactiveFormsModule } from '@angular/forms'; //Für Formulare in Angular
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RegistrierungComponent } from './registrierung/registrierung.component'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
