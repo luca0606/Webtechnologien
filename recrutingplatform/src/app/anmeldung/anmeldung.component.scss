@@ -1,7 +1,6 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     margin: 0;
     padding: 0;
   }
@@ -43,7 +42,7 @@ body {
   
   section {
     margin-top: 4rem;
-    margin-bottom: 40%;
+    margin-bottom: 20%;
   
     flex: 1; /* Fülle den verfügbaren Raum aus */
   }
@@ -53,6 +52,9 @@ body {
     color: #fff;
     text-align: center;
     width: 100%;
+    position: absolute;
+    top:900px;
+
   
     /* Toggle */
   }
