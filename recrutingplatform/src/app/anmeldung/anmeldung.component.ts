@@ -17,23 +17,24 @@ export class AnmeldungComponent {
     password: new FormControl('', Validators.required)
   });
 
-  //Router instanziieren
+  /*Router instanziieren*/
   constructor(private router: Router) {
     console.log('Router wurde instanziiert!')
   }
 
   onSubmit(): void {
-    // Hier kommt der Service-Aufruf, um Email bzw. Benutzer und Passwort abzugleichen -> Serviceaufruf(email,pw,isRecruiter) mit Rückgabewert true/false
+    // Hier kommt der Service-Aufruf, um Email bzw. Benutzer und Passwort abzugleichen -> Serviceaufruf(email,pw,isRecruiter) mit Rückgabewert successLogin=true/false
+    //Abhängig vom Rückgabewert des Service-Aufrufs wird weitergeroutet
     //Zugriff auf Email über: this.loginForm.value.email
     //Zugriff auf Passwort über: this.loginForm.value.password
 
     let successLogin = true;//ServieceAufruf
 
-    /*Dummy-Logik*/
+    /*Dummy-Logik: Wenn successLogin = true, dann route*/
     if (this.loginForm.value.email == 'man-to.wong@hotmail.de' && this.loginForm.value.password == 'manto' && this.isRecruiter == false) {
       this.router.navigate(['/']); //Routing zur Recruiter bzw. Bewerberplattform
     }
-    else {
+    else { //Login fehlgeschlaagen -> Reload, um Felder zurückzusetzen
       alert('Falsche Eingabe!')
       window.location.reload();
     }
