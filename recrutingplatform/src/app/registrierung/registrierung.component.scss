@@ -1,0 +1,151 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav li {
+    margin-right: 1rem;
+    display: flex;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  section {
+    margin-top: 4rem;
+    margin-bottom: 40%;
+  
+    flex: 1; /* Fülle den verfügbaren Raum aus */
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top:900px;
+  
+    /* Toggle */
+  }
+
+  .toggle-container {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .toggle-label {
+    display: block;
+    cursor: pointer;
+    width: 120px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+  }
+  
+  .toggle-label:before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background-color: #fff;
+    border-radius: 18px;
+    transition: all 0.3s;
+  }
+  
+  .toggle-slider {
+    position: absolute;
+    background-color: #2196F3;
+    border-radius: 20px;
+    transition: 0.3s;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    line-height: 40px; /* Same as height of the toggle-label */
+  }
+  
+  #toggle-button {
+    display: none; /* Hide the default checkbox */
+  }
+  
+  #toggle-button:checked + .toggle-label .toggle-slider {
+    transform: translateX(100%);
+  }
+  
+  #toggle-button:checked + .toggle-label {
+    background-color: #ccc; /* Color when toggled */
+  }
+  
+  .slider-text {
+    color: #fff;
+    pointer-events: none;
+  }
+
+  /*Registrierungsformular*/
+  .form-wrapper {
+    max-width: 500px;
+    margin: 2rem auto;
+    margin-top: 60px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-control {
+    margin-bottom: 20px;
+  }
+
+  input {
+    position:absolute;
+    left: 850px;
+  }
+
+  #buttonGroup{
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    position: relative;
+    bottom: 15px;
+    left: 20px;
+  }
