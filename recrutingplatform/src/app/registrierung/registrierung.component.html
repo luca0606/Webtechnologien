@@ -1,0 +1,68 @@
+<header class="fixed-header">
+    <nav>
+        <ul>
+            <li><a routerLink="/">Start</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Registrierungsformular -->
+<div class="form-wrapper">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-control">
+            <label for="vorname">Vorname:</label>
+            <input type="text" id="vorname" formControlName="vorname">
+        </div>
+        <div class="form-control">
+            <label for="nachname">Nachname:</label>
+            <input type="text" id="nachname" formControlName="nachname">
+        </div>
+        <div class="form-control">
+            <label for="geburtsdatum">Geburtsdatum:</label>
+            <input type="date" id="geburtsdatum" formControlName="geburtsdatum">
+        </div>
+        <div class="form-control">
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" formControlName="email">
+        </div>
+        <div class="form-control">
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" formControlName="telefonnummer">
+        </div>
+        <div class="form-control">
+            <label for="strasse">Straße:</label>
+            <input type="text" id="strasse" formControlName="strasse">
+        </div>
+        <div class="form-control">
+            <label for="hausnummer">Hausnummer:</label>
+            <input type="text" id="hausnummer" formControlName="hausnummer">
+        </div>
+        <div class="form-control">
+            <label for="ort">Ort:</label>
+            <input type="text" id="ort" formControlName="ort">
+        </div>
+        <div class="form-control">
+            <label for="postleitzahl">Postleitzahl:</label>
+            <input type="text" id="postleitzahl" formControlName="postleitzahl">
+        </div>
+        <div class="form-control">
+            <label for="passwort">Passwort:</label>
+            <input type="password" id="passwort" formControlName="passwort">
+        </div>
+            <!-- Toggle-->
+            <div class="toggle-container">
+                <input type="checkbox" id="toggle-button" (change)="toggleRole()" [checked]="isRecruiter">
+                <label for="toggle-button" class="toggle-label">
+                    <span class="toggle-slider">
+                        <span class="slider-text">{{ isRecruiter ? 'Recruiter' : 'Bewerber' }}</span>
+                    </span>
+                </label>
+            </div>
+            <button type="submit" [disabled]="!registerForm.valid">Registrieren</button>
+    </form>
+</div>
+
+
+<footer>
+    <p>&copy; 2024 Unternehmensname. Alle Rechte vorbehalten.</p>
+</footer>
