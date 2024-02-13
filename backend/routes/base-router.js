@@ -9,7 +9,6 @@ class BaseRouter {
         this.router = express.Router()
         this.validator = new Validator(descriptor)
 
-
         this.router.get('/', async (req, res) => {
 
             const result = await service.load()

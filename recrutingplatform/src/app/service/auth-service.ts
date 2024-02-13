@@ -4,9 +4,10 @@ import { AuthModel } from './auth-model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   registrieren(email: string, password: string) {
+    console.log("hi")
     const authData: AuthModel = { username: email, password: password };
 
     this.http
