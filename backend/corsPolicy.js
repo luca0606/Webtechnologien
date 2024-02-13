@@ -1,14 +1,15 @@
 const cors = require("cors")
 // define allowed urls to make request from this api. 
-const whitelist = ['http://localhost:8082', 'http://localhost:8080', "http://localhost:8081", "*", "http://localhost:8081"]
+const whitelist = ['http://localhost:8082', 'http://localhost:8080', "http://localhost:8081", "http://localhost:65339", "*"]
 const corsOptions = {
     origin: function (origin, callback) {
-        callback(null, true);
-        // if (whitelist.indexOf(origin) !== -1) {
-        //     callback(null, true)
-        // } else {
-        //     callback(new Error('Not allowed by CORS'))
-        // }
+        console.log("huuuu backend")
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            console.log("cors error")
+            callback(new Error('Not allowed by CORS'))
+        }
     }
 }
 const PORT = process.env.PORT || 3000;
