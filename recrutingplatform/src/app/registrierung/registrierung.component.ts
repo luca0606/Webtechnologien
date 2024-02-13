@@ -22,12 +22,12 @@ export class RegistrierungComponent implements OnInit {
         nachname: ['', Validators.required],
         geburtsdatum: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        telefonnummer: ['', [Validators.required, Validators.pattern('^[0-9]{1,15}$')]],  // Als Beispiel: ein 10-stelliger numerischer Wert.
+        telefonnummer: ['', [Validators.required, Validators.pattern('^[0-9]{1,15}$')]],  // Als Beispiel: ein 15-stelliger numerischer Wert.
         strasse: ['', Validators.required],
         hausnummer: ['', Validators.required],
         ort: ['', Validators.required],
         postleitzahl: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]],  // Deutsche PLZ: 5-stelliger numerischer Wert.
-        passwort: ['', [Validators.required, Validators.minLength(6)]]  // Mindestlänge für Passwörter: 8 Zeichen + Großbuchstabe + Ziffer
+        passwort: ['', [Validators.required, Validators.minLength(6)]]  // Mindestlänge für Passwörter: 6 Zeichen
       });
     }
   

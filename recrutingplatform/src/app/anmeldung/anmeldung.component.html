@@ -33,16 +33,6 @@
                 </small>
             </div>
         </div>
-        
-        <!-- Toggle-->
-        <div class="toggle-container">
-            <input type="checkbox" id="toggle-button" (change)="toggleRole()" [checked]="isRecruiter">
-            <label for="toggle-button" class="toggle-label">
-                <span class="toggle-slider">
-                    <span class="slider-text">{{ isRecruiter ? 'Recruiter' : 'Bewerber' }}</span>
-                </span>
-            </label>
-        </div>
         <div id ='buttonGroup'>
           <button type="submit" [disabled]="loginForm.invalid">Anmelden</button>
           <button routerLink="/registrierung">Registrieren</button>
@@ -51,7 +41,6 @@
     </form>
     
 </section>
-
 
 <footer>
     <p>&copy; 2024 Unternehmensname. Alle Rechte vorbehalten.</p>
