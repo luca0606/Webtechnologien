@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthModel } from './auth-model';
 
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   constructor(private http: HttpClient) {}
@@ -21,9 +22,10 @@ export class AuthService {
     const authData: AuthModel = { username: email, password: password };
 
     this.http
-      .post('http://localhost:4200/anmdelung/', authData)
+      .post('http://localhost:4200/anmeldung/', authData)
       .subscribe((res) => {
         //login Kontrolle
+        //Routing
         console.log(res);
       });
   }

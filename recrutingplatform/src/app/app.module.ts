@@ -7,6 +7,7 @@ import { StartseiteComponent } from './startseite/startseite.component';
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
 import { ReactiveFormsModule } from '@angular/forms'; //Für Formulare in Angular
+import { HttpClientModule } from '@angular/common/http'; //HTTP-Client
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms'; //Für Formulare in Angula
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
