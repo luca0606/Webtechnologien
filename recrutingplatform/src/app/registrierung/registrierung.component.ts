@@ -12,6 +12,7 @@ import { RegistrierungService } from '../service/registrierung.service';
 })
 export class RegistrierungComponent implements OnInit {
    isRecruiter:boolean = false;
+   registrationSuccessful:boolean = false;
   
     registerForm: FormGroup;
 
@@ -37,7 +38,8 @@ export class RegistrierungComponent implements OnInit {
       if (this.registerForm.valid) {
         
         this.rg.addUser(this.registerForm.value.vorname,this.registerForm.value.nachname,this.registerForm.value.email,this.registerForm.value.passwort,this.isRecruiter);
-        this.r.navigate(['Stellenportal']);
+        this.registrationSuccessful = true;
+        //this.r.navigate(['Stellenportal']);
         
         //Zugriff auf Email über: this.registerForm.value.vorname
         //Serviceaufruf(vorname,nachname,geburtsdatum,email,telefonnummer,strasse,hausnummer,ort,postleitzahl,passwort,isRecruiter) -> Rückgabewert: registrationSuccess = true

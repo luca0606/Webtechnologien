@@ -59,6 +59,7 @@
                 </label>
             </div>
             <button type="submit" [disabled]="!registerForm.valid">Registrieren</button>
+            <div *ngIf="registrationSuccessful">Registrierung erfolgreich!</div>
     </form>
 </div>
 
