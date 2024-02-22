@@ -12,6 +12,10 @@ export class AuthService {
 
   anmelden(email: string, password: string) {
     const authData: AuthModel = { username: email, password: password };
+    //Serviceaufruf (Backend): 
+    //1. get Email & password (Frontend)
+    //2. Eingabe-Pw-Verschlüsselung (Frontend)
+    //3. Vergleich der Hash-strings
     
     this.http
       .post('http://localhost:4200/anmeldung/', authData)
