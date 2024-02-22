@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //Für das Registrierungsformulare 
 import { Router } from '@angular/router'; //Router für Weiterleitung nach Submit
+import { RegistrierungService } from '../service/registrierung.service';
 
 
 
@@ -10,11 +11,12 @@ import { Router } from '@angular/router'; //Router für Weiterleitung nach Submi
   styleUrls: ['./registrierung.component.scss']
 })
 export class RegistrierungComponent implements OnInit {
-  isRecruiter = false;
+   isRecruiter:boolean = false;
+   registrationSuccessful:boolean = false;
   
     registerForm: FormGroup;
 
-    constructor(private fb: FormBuilder) {};
+    constructor(private fb: FormBuilder, private rg:RegistrierungService, private r:Router ) {};
   
     ngOnInit() {
       this.registerForm = this.fb.group({
@@ -32,17 +34,21 @@ export class RegistrierungComponent implements OnInit {
     }
   
     onSubmit() {
+
       if (this.registerForm.valid) {
+        
+        this.rg.addUser(this.registerForm.value.vorname,this.registerForm.value.nachname,this.registerForm.value.email,this.registerForm.value.passwort,this.isRecruiter);
+        this.registrationSuccessful = true;
+        console.log('test');
+        //this.r.navigate(['Stellenportal']);
+        
         //Zugriff auf Email über: this.registerForm.value.vorname
         //Serviceaufruf(vorname,nachname,geburtsdatum,email,telefonnummer,strasse,hausnummer,ort,postleitzahl,passwort,isRecruiter) -> Rückgabewert: registrationSuccess = true
         //if(success == true && isRecruiter){Route weiter zum Bewerberportal bzw. Stellenpflege}
         //else(Reload, um Felder zurückzusetzen)
-        alert('Submit erfolgreich.');
       }
       else{
         alert('Eingabedaten sind fehlerhaft.');
-        window.location.reload();
-
       }
     }
     toggleRole(): void {
