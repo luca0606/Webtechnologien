@@ -39,6 +39,7 @@ export class RegistrierungComponent implements OnInit {
         
         this.rg.addUser(this.registerForm.value.vorname,this.registerForm.value.nachname,this.registerForm.value.email,this.registerForm.value.passwort,this.isRecruiter);
         this.registrationSuccessful = true;
+        console.log('test');
         //this.r.navigate(['Stellenportal']);
         
         //Zugriff auf Email über: this.registerForm.value.vorname
