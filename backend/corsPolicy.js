@@ -1,6 +1,6 @@
 const cors = require("cors")
 // define allowed urls to make request from this api. 
-const whitelist = ['http://localhost:8082', 'http://localhost:8080', "http://localhost:8081", "http://localhost:65339", "*"]
+const whitelist = ['http://localhost:8082', 'http://localhost:8080', "http://localhost:8081", "http://localhost:65339", "*", "http://localhost:4200"]
 const corsOptions = {
     origin: function (origin, callback) {
         console.log("huuuu backend")
