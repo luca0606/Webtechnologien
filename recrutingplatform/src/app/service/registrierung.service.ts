@@ -21,7 +21,7 @@ hashPassword(password: string) {
       lastname: lastName,
       email: email,
       password: this.hashPassword(pw),
-      RecruiterRole: role
+      recruiterRole: role
     }
 
     this.http.post("http://localhost:3000/user/", user)
