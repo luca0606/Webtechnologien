@@ -8,8 +8,20 @@
     </nav>
   </header>
   
+  <div class="job-list">
+    <h1>Stellenportal</h1>
+    <div class="job-card" *ngFor="let job of jobList">
+      <div class="job-header">
+        <h2>{{ job.jobTitle }}</h2>
+        <span class="job-salary">{{ job.salaryRangeMin | currency:'EUR':'symbol':'1.0-0' }} - {{ job.salaryRangeMax | currency:'EUR':'symbol':'1.0-0' }}</span>
+      </div>
+      <p class="location">{{ job.location }}</p>
+      <!-- Hier könnten Sie z.B. Buttons oder Links für "Mehr erfahren" oder "Bewerben" hinzufügen -->
+      <button class="apply-button">Bewerben</button>
+    </div>
+  </div>
 
-  
+
   <footer>
     <p>&copy; 2024 Unternehmensname. Alle Rechte vorbehalten.</p>
   </footer>
