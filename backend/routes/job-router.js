@@ -1,7 +1,7 @@
 const { JobService } = require('../services')
 const BaseRouter = require('./base-router')
 const JobModel = require("../models/role")
-const JobDescriptor = require("../validation/role-validation")
+const JobDescriptor = require("../validation/job-validator")
 
 class JobRouter extends BaseRouter {
 

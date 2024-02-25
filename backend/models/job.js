@@ -1,13 +1,13 @@
 const mongoose = require("mongoose")
 
 const jobSchema = new mongoose.Schema({
-    jobtitle: String,
-    jobdescription: String,
-    jobrequirements: String,
     benefits: String,
+    jobDescription: String,
+    jobRequirements: String,
+    jobTitle: String,
+    location: String,
     salaryRangeMin: Number,
     salaryRangeMax: Number,
-    vacancyFilled: Boolean, 
     vacancyActive: Boolean
 },
     { collection: "jobs" }
