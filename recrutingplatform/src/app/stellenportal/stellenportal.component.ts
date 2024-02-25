@@ -45,5 +45,5 @@ export class StellenportalComponent {
   }
   
     this.stellenService.addJob(ijob.jobTitle,ijob.jobDescription, ijob.jobRequirements, ijob.location, ijob.benefits, ijob.salaryRangeMin, ijob.salaryRangeMax, ijob.vacancyActive);
-    }
+  }
 }
