@@ -9,12 +9,8 @@ const BaseOption = {
 const UserSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
-    title: String,
-    roles: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "RoleModel",
-        autopopulate: { maxDepth: 2 }
-    }]
+    email: String,
+    recruiterRole: Boolean
 },
     BaseOption
 )

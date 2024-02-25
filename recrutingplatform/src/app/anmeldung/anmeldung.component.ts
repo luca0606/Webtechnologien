@@ -33,20 +33,6 @@ export class AnmeldungComponent {
     //Zugriff auf Email über: this.loginForm.value.email
     //Zugriff auf Passwort über: this.loginForm.value.password
 
-    let successLogin = true; //ServieceAufruf
-
-    /*Dummy-Logik: Wenn successLogin = true, dann route*/
-    if (
-      this.loginForm.value.email == 'man-to.wong@hotmail.de' &&
-      this.loginForm.value.password == 'manto' &&
-      this.isRecruiter == false
-    ) {
-      this.router.navigate(['/']); //Routing zur Recruiter bzw. Bewerberplattform
-    } else {
-      //Login fehlgeschlaagen -> Reload, um Felder zurückzusetzen
-      alert('Falsche Eingabe!');
-      window.location.reload();
-    }
   }
 
   toggleRole(): void {

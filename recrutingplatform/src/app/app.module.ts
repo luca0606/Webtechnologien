@@ -10,7 +10,9 @@ import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TestComponent } from './testbackend/test/test.component';
-import { StellenportalComponent } from './stellenportal/stellenportal.component'; //Für Formulare in Angular
+import { StellenportalComponent } from './stellenportal/stellenportal.component';
+import { BewerberlisteComponent } from './bewerberliste/bewerberliste.component';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { StellenportalComponent } from './stellenportal/stellenportal.component'
     AnmeldungComponent,
     RegistrierungComponent,
     TestComponent,
-    StellenportalComponent
+    StellenportalComponent,
+    BewerberlisteComponent,
   ],
   imports: [
     BrowserModule,
