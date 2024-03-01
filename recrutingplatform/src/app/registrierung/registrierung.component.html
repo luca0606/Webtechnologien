@@ -59,9 +59,12 @@
                 </label>
             </div>
             <button type="submit" [disabled]="!registerForm.valid">Registrieren</button>
-    </form>
+            <div>
+               <div *ngIf="registrationSuccessful">Registrierung erfolgreich!</div>
+               <button *ngIf="registrationSuccessful" id='anmeldeButton' routerLink="/anmeldung">Weiter zur Anmeldung</button>
+            </div>    
+        </form>
 </div>
-
 
 <footer>
     <p>&copy; 2024 Unternehmensname. Alle Rechte vorbehalten.</p>
