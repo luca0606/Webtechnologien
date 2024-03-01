@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StellenService } from '../service/stellen.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stellenportal',
@@ -10,7 +11,7 @@ export class StellenportalComponent {
   jobList:any[];
   unfilteredjobList:any[];
   
-  constructor(private stellenService:StellenService){}
+  constructor(private stellenService:StellenService, private r:Router){}
 
   ngOnInit(){
   this.buildJobList();
@@ -29,6 +30,7 @@ export class StellenportalComponent {
         console.error('Fehler bei der Anfrage:', err);
       }
     );
+
   }
 
   createJob(){
@@ -45,5 +47,10 @@ export class StellenportalComponent {
   }
   
     this.stellenService.addJob(ijob.jobTitle,ijob.jobDescription, ijob.jobRequirements, ijob.location, ijob.benefits, ijob.salaryRangeMin, ijob.salaryRangeMax, ijob.vacancyActive);
+  }
+
+  openJob(job:any){
+    this.stellenService.sendJobData(job) //Alle damit Stellenliste
+    this.r.navigate(['/stellenanzeige']);
   }
 }

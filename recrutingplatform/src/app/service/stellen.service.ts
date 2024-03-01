@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StellenService {
+  private jobData = new BehaviorSubject<any>(null); // Initialwert für den Datenstrom
+  currentData = this.jobData.asObservable(); // Observable, auf das Komponenten subscriben können
+
 
   constructor(private http: HttpClient) {}
 
@@ -43,6 +46,10 @@ export class StellenService {
   }
 
   deleteJob(){
+  }
+
+  sendJobData(message:any){
+    this.jobData.next(message) //Datenübergabe an den nächsten Component
   }
 
   

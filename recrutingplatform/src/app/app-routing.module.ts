@@ -10,6 +10,7 @@ import { RegistrierungComponent } from './registrierung/registrierung.component'
 import { TestComponent } from './testbackend/test/test.component';
 import { StellenportalComponent } from './stellenportal/stellenportal.component';
 import { BewerberlisteComponent } from './bewerberliste/bewerberliste.component';
+import { StellenComponent } from './stellen/stellen.component';
 
 // Extras
 import { AuthGuard } from './authGuard';
