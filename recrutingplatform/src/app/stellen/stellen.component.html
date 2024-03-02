@@ -7,9 +7,19 @@
       </ul>
     </nav>
   </header>
-   <div>
-    
-   </div>
+
+  <section>
+    <div class="job-details-container">
+      <h2>{{ message.jobTitle }}</h2>
+      <p><strong>Beschreibung:</strong><br>{{ message.jobDescription }}</p>
+      <p><strong>Anforderungen:</strong><br> {{ message.jobRequirements }}</p>
+      <p><strong>Benefits:</strong><br>{{ message.benefits }}</p>
+      <p><strong>Ort:</strong> {{ message.location }}</p>
+      <p><strong>Gehaltsrange:</strong> {{ message.salaryRangeMin }} - {{ message.salaryRangeMax }}</p>
+      <button class="apply-button" (click)="apply()">Jetzt Bewerben!</button>    
+    </div>
+   
+  </section>
 
   <footer>
     <p>&copy; 2024 Unternehmensname. Alle Rechte vorbehalten.</p>
