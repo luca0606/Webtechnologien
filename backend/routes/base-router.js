@@ -22,6 +22,7 @@ class BaseRouter {
         })
 
         this.router.post('/', async (req, res) => {
+            console.log("???")
             try {
                 await this.validator.validate(req.body)
             } catch ({ errors }) {

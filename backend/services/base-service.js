@@ -31,6 +31,10 @@ class BaseService {
     return this.model.find({ [property]: value })
   }
 
+  async findOne(property, value) {
+    return this.model.findOne({ [property]: value })
+  }
+
 }
 
 module.exports = BaseService

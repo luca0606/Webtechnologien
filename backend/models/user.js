@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
     BaseOption
 )
 
-UserSchema.plugin(require('mongoose-autopopulate'))
+// UserSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports.UserModel = mongoose.model("UserModel", UserSchema)
 

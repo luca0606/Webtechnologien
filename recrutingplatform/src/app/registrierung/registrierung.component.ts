@@ -11,43 +11,46 @@ import { RegistrierungService } from '../service/registrierung.service';
   styleUrls: ['./registrierung.component.scss']
 })
 export class RegistrierungComponent implements OnInit {
-   isRecruiter:boolean = false;
-   registrationSuccessful:boolean = false;
-  
-    registerForm: FormGroup;
+  isRecruiter: boolean = false;
+  registrationSuccessful: boolean = false;
 
-    constructor(private fb: FormBuilder, private rg:RegistrierungService, private r:Router ) {};
-  
-    ngOnInit() {
-      this.registerForm = this.fb.group({
-        vorname: ['', Validators.required],
-        nachname: ['', Validators.required],
-        geburtsdatum: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        telefonnummer: ['', [Validators.required, Validators.pattern('^[0-9]{1,15}$')]],  // Als Beispiel: ein 10-stelliger numerischer Wert.
-        strasse: ['', Validators.required],
-        hausnummer: ['', Validators.required],
-        ort: ['', Validators.required],
-        postleitzahl: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]],  // Deutsche PLZ: 5-stelliger numerischer Wert.
-        passwort: ['', [Validators.required, Validators.minLength(6)]]  // Mindestlänge für Passwörter: 8 Zeichen + Großbuchstabe + Ziffer
-      });
-    }
-  
-    onSubmit() {
+  registerForm: FormGroup;
 
-      if (this.registerForm.valid) {
-        
-        this.rg.addUser(this.registerForm.value.vorname,this.registerForm.value.nachname,this.registerForm.value.email,this.registerForm.value.passwort,this.isRecruiter);
-        this.registrationSuccessful = true;
+  constructor(private fb: FormBuilder, private rg: RegistrierungService, private r: Router) { };
 
-      }
-      else{
-        alert('Eingabedaten sind fehlerhaft.');
-      }
+  ngOnInit() {
+    this.registerForm = this.fb.group({
+      vorname: ['', Validators.required],
+      nachname: ['', Validators.required],
+      geburtsdatum: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefonnummer: ['', [Validators.required, Validators.pattern('^[0-9]{1,15}$')]],  // Als Beispiel: ein 10-stelliger numerischer Wert.
+      strasse: ['', Validators.required],
+      hausnummer: ['', Validators.required],
+      ort: ['', Validators.required],
+      postleitzahl: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]],  // Deutsche PLZ: 5-stelliger numerischer Wert.
+      passwort: ['', [Validators.required, Validators.minLength(6)]]  // Mindestlänge für Passwörter: 8 Zeichen + Großbuchstabe + Ziffer
+    });
+  }
+
+  onSubmit() {
+
+    if (this.registerForm.valid) {
+
+      this.rg.addUser(this.registerForm.value.vorname, this.registerForm.value.nachname, this.registerForm.value.email, this.registerForm.value.passwort, this.isRecruiter);
+      this.rg.addUserAuthData(this.registerForm.value.email, this.registerForm.value.passwort);
+      this.registrationSuccessful = true;
+      // send user automatically anmeldung route after registration
+      // clear form after registration
+
     }
-    toggleRole(): void {
-      console.log(this.isRecruiter);
-      this.isRecruiter = !this.isRecruiter;
+    else {
+      alert('Eingabedaten sind fehlerhaft.');
     }
-    
+  }
+  toggleRole(): void {
+    console.log(this.isRecruiter);
+    this.isRecruiter = !this.isRecruiter;
+  }
+
 }

@@ -1,10 +1,10 @@
-<header class="fixed-header">
+<!-- <header class="fixed-header">
     <nav>
         <ul>
             <li><a routerLink="/">Start</a></li>
         </ul>
     </nav>
-</header>
+</header> -->
 
 <section>
     <h2>Stellenportal Login</h2>
@@ -33,7 +33,7 @@
                 </small>
             </div>
         </div>
-        
+
         <!-- Toggle-->
         <div class="toggle-container">
             <input type="checkbox" id="toggle-button" (change)="toggleRole()" [checked]="isRecruiter">
@@ -43,16 +43,16 @@
                 </span>
             </label>
         </div>
-        <div id ='buttonGroup'>
-          <button type="submit" [disabled]="loginForm.invalid">Anmelden</button>
-          <button routerLink="/registrierung">Registrieren</button>
-          
+        <div id='buttonGroup'>
+            <button type="submit" [disabled]="loginForm.invalid">Anmelden</button>
+            <button routerLink="/registrierung">Registrieren</button>
+
         </div>
     </form>
-    
+
 </section>
 
-
+<!-- 
 <footer>
     <p>&copy; 2024 Unternehmensname. Alle Rechte vorbehalten.</p>
-</footer>
+</footer> -->
