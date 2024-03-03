@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
     constructor(private router: Router) { }
 
+    // check if user is logged in and redirect to login page if not
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
@@ -21,9 +22,9 @@ export class AuthGuard implements CanActivate {
 
         return true;
     }
-
+    // check if user is logged in
     private checkIfUserIsLoggedIn(): boolean {
-        console.log(!!localStorage.getItem('loggedIn'))
-        return !!localStorage.getItem('loggedIn');
+        const isLoggedIn = localStorage.getItem('loggedIn')
+        return isLoggedIn === "true";
     }
 }
