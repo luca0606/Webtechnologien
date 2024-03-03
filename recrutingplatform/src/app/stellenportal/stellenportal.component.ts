@@ -53,4 +53,9 @@ export class StellenportalComponent {
     this.stellenService.sendJobData(job) //Alle damit Stellenliste
     this.r.navigate(['/stellenanzeige']);
   }
+
+  apply(){
+    this.r.navigate(['/test']);
+    console.log('Hallo');
+  }
 }

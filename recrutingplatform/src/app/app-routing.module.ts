@@ -18,11 +18,12 @@ import { AuthGuard } from './authGuard';
 const routes: Routes = [
   { path: 'anmeldung', component: AnmeldungComponent },
   { path: 'registrierung', component: RegistrierungComponent },
+  { path: '', component: StartseiteComponent },
   {
     path: '',
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: StartseiteComponent },
+     
       { path: 'stellenportal', component: StellenportalComponent },
       { path: 'test', component: TestComponent, canActivate: [AuthGuard] },
       { path: 'bewerberliste', component: BewerberlisteComponent },
