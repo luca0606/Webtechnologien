@@ -1,14 +1,4 @@
-<header class="fixed-header">
-    <nav>
-      <ul>
-        <li><a routerLink="/">Start</a></li>
-        <li><a routerLink="/anmeldung">Anmeldung</a></li>
-        <li><a routerLink="/stellenportal">Stellenportal</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section>
+ <section>  
     <div class="job-details-container">
       <h2>{{ message.jobTitle }}</h2>
       <p><strong>Beschreibung:</strong><br>{{ message.jobDescription }}</p>
@@ -18,9 +8,6 @@
       <p><strong>Gehaltsrange:</strong> {{ message.salaryRangeMin }}€ - {{ message.salaryRangeMax }}€</p>
       <button class="apply-button" (click)="apply()">Jetzt Bewerben!</button>    
     </div>
-   
   </section>
 
-  <footer>
-    <p>&copy; 2024 Unternehmensname. Alle Rechte vorbehalten.</p>
-  </footer>
+

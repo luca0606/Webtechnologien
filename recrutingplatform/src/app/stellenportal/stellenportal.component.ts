@@ -55,7 +55,7 @@ export class StellenportalComponent {
   }
 
   apply(){
-    this.r.navigate(['/test']);
+    //this.r.navigate(['/bewerben']);
     console.log('Hallo');
   }
 }
