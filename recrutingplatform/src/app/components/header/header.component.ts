@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/service/auth-service';
 import { DataService } from 'src/app/service/data.service';
@@ -13,28 +13,31 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent {
 
-  private showHeaderAndFooter: Subscription
+  // private showHeaderAndFooter: Subscription
+  protected showHeaderAndFooter: Subscription
+  isLoggedIn: boolean = false;
 
   constructor(
     private authService: AuthService,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
+
 
 
   }
 
   abmelden() {
-    console.log("hollolllliii")
     this.authService.abmelden()
   }
 
-  async ngOnInit() {
-    await this.dataService.currentIsLoggedIn.subscribe(value => {
-      // this.showHeaderAndFooter = value
-      console.log(value)
+  ngOnInit() {
+    this.dataService.currentIsLoggedIn.subscribe(value => {
+      this.isLoggedIn = value
+      // console.log("header", this.isLoggedIn)
+      this.cdr.detectChanges();
     })
-    console.log(this.showHeaderAndFooter)
   }
 
   ngOnDestroy() {
