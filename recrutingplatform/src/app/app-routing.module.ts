@@ -10,6 +10,7 @@ import { RegistrierungComponent } from './registrierung/registrierung.component'
 import { TestComponent } from './testbackend/test/test.component';
 import { StellenportalComponent } from './stellenportal/stellenportal.component';
 import { BewerberlisteComponent } from './bewerberliste/bewerberliste.component';
+import { StellenComponent } from './stellen/stellen.component';
 
 // Extras
 import { AuthGuard } from './authGuard';
@@ -17,14 +18,17 @@ import { AuthGuard } from './authGuard';
 const routes: Routes = [
   { path: 'anmeldung', component: AnmeldungComponent },
   { path: 'registrierung', component: RegistrierungComponent },
+  { path: '', component: StartseiteComponent },
   {
     path: '',
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: StartseiteComponent },
+     
       { path: 'stellenportal', component: StellenportalComponent },
       { path: 'test', component: TestComponent, canActivate: [AuthGuard] },
-      { path: 'bewerberliste', component: BewerberlisteComponent }
+      { path: 'bewerberliste', component: BewerberlisteComponent },
+      { path: 'stellenanzeige', component: StellenComponent}
+      
     ]
   }
 
