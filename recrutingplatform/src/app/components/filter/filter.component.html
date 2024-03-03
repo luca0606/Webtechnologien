@@ -1,0 +1,32 @@
+<div class="filter-bar">
+    <!-- Job Title -->
+    <input type="text" class="search-input" placeholder="Jobtitel suchen...">
+
+    <!-- Job Requirements -->
+    <input type="text" class="search-input" placeholder="Anforderungen suchen...">
+
+    <!-- Location -->
+    <select class="filter" [(ngModel)]="filter.locations">
+        <option value="">Stadt wählen</option>
+        <option *ngFor="let location of filter.locations" [value]='location'>{{ location }}</option>
+    </select>
+
+    <!-- Salary Range -->
+    <!-- Basitlik adına, burada sabit değerler kullanıyorum. Gerçek bir uygulamada, bu değerleri de dinamik olarak belirlemeniz gerekebilir. -->
+    <!-- <select class="filter" [(ngModel)]="filter.salary">
+        <option value="">Gehalt wählen</option>
+        <option value="0-50000">Unter 50.000</option>
+        <option value="50000-100000">50.000 bis 100.000</option>
+        <option value="100001-150000">100.001 bis 150.000</option>
+    </select> -->
+
+    <!-- Vacancy Active -->
+    <!-- <select class="filter" [(ngModel)]="filter.vacancyActive">
+        <option value="">Aktivitätsstatus wählen</option>
+        <option [value]="true">Aktiv</option>
+        <option [value]="false">Inaktiv</option>
+    </select> -->
+
+    <button class="btn-filter" (click)="applyFilters()">Filter anwenden</button>
+    <button class="btn-reset" (click)="resetFilters()">Filter löschen</button>
+</div>
