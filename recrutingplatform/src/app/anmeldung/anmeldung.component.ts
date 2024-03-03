@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'; //Für Formulare
 import { Router } from '@angular/router'; //Router für Weiterleitung nach Submit
 import { AuthService } from '../service/auth-service';
+import { hashPassword } from '../shared/helpers';
 
 @Component({
   selector: 'app-anmeldung',
@@ -25,13 +26,15 @@ export class AnmeldungComponent {
   onSubmit(): void {
     this.authService.anmelden(
       this.loginForm.value.email,
-      this.loginForm.value.password
+      hashPassword(this.loginForm.value.password)
     );
 
     // Hier kommt der Service-Aufruf, um Email bzw. Benutzer und Passwort abzugleichen -> Serviceaufruf(email,pw,isRecruiter) mit Rückgabewert successLogin=true/false
     //Abhängig vom Rückgabewert des Service-Aufrufs wird weitergeroutet
     //Zugriff auf Email über: this.loginForm.value.email
     //Zugriff auf Passwort über: this.loginForm.value.password
+
+    //Route to stellenportal 
 
   }
 
