@@ -25,7 +25,9 @@ const routes: Routes = [
       { path: '', component: StartseiteComponent },
       { path: 'stellenportal', component: StellenportalComponent },
       { path: 'test', component: TestComponent, canActivate: [AuthGuard] },
-      { path: 'bewerberliste', component: BewerberlisteComponent }
+      { path: 'bewerberliste', component: BewerberlisteComponent },
+      { path: 'stellenanzeige', component: StellenComponent}
+      
     ]
   }
 
