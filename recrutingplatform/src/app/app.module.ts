@@ -7,12 +7,13 @@ import { AppComponent } from './app.component';
 import { StartseiteComponent } from './startseite/startseite.component';
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestComponent } from './testbackend/test/test.component';
 import { StellenportalComponent } from './stellenportal/stellenportal.component';
 import { BewerberlisteComponent } from './bewerberliste/bewerberliste.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,14 @@ import { FooterComponent } from './components/footer/footer.component';
     BewerberlisteComponent,
     HeaderComponent,
     FooterComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
   ],

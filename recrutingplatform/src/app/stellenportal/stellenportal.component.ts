@@ -8,33 +8,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./stellenportal.component.scss']
 })
 export class StellenportalComponent {
-  jobList:any[];
-  unfilteredjobList:any[];
-  
-  constructor(private stellenService:StellenService, private r:Router){}
+  jobList: any[];
+  unfilteredjobList: any[];
+  isJobListLoaded: boolean = false;
 
-  ngOnInit(){
-  this.buildJobList();
+  constructor(private stellenService: StellenService, private r: Router) { }
+
+
+  ngOnInit() {
+    this.buildJobList();
+    // todo: Build filter here and give it to filter component
+
   }
 
-  buildJobList(){
+  ngOnChanges() {
+  }
+
+  buildJobList() {
     this.stellenService.getJobList().subscribe(
-      (res) => {
-        // Verarbeiten Sie das Ergebnis hier
-        this.unfilteredjobList = res;
-        this.jobList = this.unfilteredjobList.filter(job =>job.vacancyActive == true);
-        console.log('Ergebnis der Anfrage:', this.jobList);
+      async (res) => {
+        this.unfilteredjobList = await res;
+        this.jobList = this.unfilteredjobList.filter(job => job.vacancyActive == true);
+        this.isJobListLoaded = true;
       },
       (err) => {
-        // Fehlerbehandlung hier
         console.error('Fehler bei der Anfrage:', err);
       }
     );
 
   }
 
-  createJob(){
-     
+  createJob() {
+
     let ijob = {
       benefits: 'Teamevents',
       jobTitle: 'Ausbildung zum Fachinformatiker',
@@ -44,17 +49,22 @@ export class StellenportalComponent {
       salaryRangeMin: 20000,
       salaryRangeMax: 22000,
       vacancyActive: false
-  }
-  
-    this.stellenService.addJob(ijob.jobTitle,ijob.jobDescription, ijob.jobRequirements, ijob.location, ijob.benefits, ijob.salaryRangeMin, ijob.salaryRangeMax, ijob.vacancyActive);
+    }
+
+    this.stellenService.addJob(ijob.jobTitle, ijob.jobDescription, ijob.jobRequirements, ijob.location, ijob.benefits, ijob.salaryRangeMin, ijob.salaryRangeMax, ijob.vacancyActive);
   }
 
-  openJob(job:any){
+  onJobListFiltered(filteredJobList: any[]) {
+    this.jobList = filteredJobList;
+  }
+
+
+  openJob(job: any) {
     this.stellenService.sendJobData(job) //Alle damit Stellenliste
     this.r.navigate(['/stellenanzeige']);
   }
 
-  apply(){
+  apply() {
     //this.r.navigate(['/bewerben']);
     console.log('Hallo');
   }
