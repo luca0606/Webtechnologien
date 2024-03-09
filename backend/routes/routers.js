@@ -3,6 +3,7 @@ const RoleRouter = require("./role-router")
 const AuthRouter = require("./auth-router")
 const JobRouter = require("./job-router")
 const FilterRouter = require("./filter-router")
+const ApplicationRouter = require("./application-router")
 
 module.exports = app => {
     app.use("/user", UserRouter)
@@ -10,4 +11,5 @@ module.exports = app => {
     app.use("/auth", AuthRouter)
     app.use("/job", JobRouter)
     app.use("/filter", FilterRouter)
+    app.use("/application", ApplicationRouter)
 }
