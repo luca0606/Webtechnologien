@@ -11,8 +11,13 @@ export class StellenportalComponent {
   jobList: any[];
   unfilteredjobList: any[];
   isJobListLoaded: boolean = false;
-
-  constructor(private stellenService: StellenService, private r: Router) { }
+  user = null;
+  constructor(private stellenService: StellenService, private r: Router) {
+    const navigation = this.r.getCurrentNavigation();
+    this.user = navigation?.extras.state["user"]
+    // You have here user data from the login
+    // You can use user.recruiterRole to check if the user is a recruiter
+  }
 
 
   ngOnInit() {
