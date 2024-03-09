@@ -10,13 +10,18 @@ import { BewerbenService } from '../service/bewerben.service';
 })
 export class BewerbenComponent {
   isUploaded: boolean = false;
+  applicationSuccessful: boolean = false;
   bewerbenForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private rg: BewerbenService,
-    private r: Router
-  ) {}
+    private router: Router
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    const id = navigation?.extras.state['id'];
+    console.log(id);
+  }
 
   ngOnInit() {
     this.bewerbenForm = this.fb.group({
@@ -33,6 +38,15 @@ export class BewerbenComponent {
     }
   }
   onSubmit() {
-    console.log('Formular abgeschickt');
+    if (this.bewerbenForm.valid) {
+      this.rg.addApplication(
+        this.bewerbenForm.value.bewerbung,
+        this.bewerbenForm.value.datei
+      );
+      console.log('Formular abgeschickt');
+      this.applicationSuccessful = true;
+    } else {
+      alert('Eingabedaten sind fehlerhaft.');
+    }
   }
 }
