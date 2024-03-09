@@ -160,6 +160,29 @@ export class FilterComponent {
     });
   }
 
+  //sort and emit jobs by title
+  sortJobsByTitle() {
+    this.jobList.sort((a, b) => a.jobTitle.localeCompare(b.jobTitle));
+    this.jobListFiltered.emit(this.jobList);
+  }
+  //sort and emit jobs by location
+  sortJobsByLocation() {
+    this.jobList.sort((a, b) => a.location.localeCompare(b.location));
+    this.jobListFiltered.emit(this.jobList);
+  }
+
+  //sort and emit jobs by salary
+  sortJobsBySalary() {
+    this.jobList.sort((a, b) => a.salaryRangeMin - b.salaryRangeMin);
+    this.jobListFiltered.emit(this.jobList);
+  }
+
+  //sort and emit jobs by requirement
+  sortJobsByRequirement() {
+    this.jobList.sort((a, b) => a.jobRequirements.localeCompare(b.jobRequirements));
+    this.jobListFiltered.emit(this.jobList);
+  }
+
   ngOnInit() {
     this.jobList ? this.createFilterArrays() : "";
     this.jobList ? this.createLocalJobList() : "";
