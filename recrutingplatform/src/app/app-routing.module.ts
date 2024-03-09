@@ -28,7 +28,7 @@ const routes: Routes = [
       { path: 'test', component: TestComponent, canActivate: [AuthGuard] },
       { path: 'bewerberliste', component: BewerberlisteComponent },
       { path: 'stellenanzeige', component: StellenComponent}
-      
+
     ]
   }
 

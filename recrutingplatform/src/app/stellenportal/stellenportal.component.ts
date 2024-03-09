@@ -76,8 +76,8 @@ export class StellenportalComponent {
     this.r.navigate(['/stellenanzeige']);
   }
 
-  apply() {
-    //this.r.navigate(['/bewerben']);
-    console.log('Hallo');
+  apply(job:any) {
+    alert(job._id);
+    //this.r.navigate(['/'], { state: { id: job._id } });
   }
 }

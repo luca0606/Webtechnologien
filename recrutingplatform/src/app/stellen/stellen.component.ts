@@ -46,8 +46,8 @@ export class StellenComponent {
 
   apply() {
     //Click auf "Jetzt Bewerben" Button
-    alert(this.message.jobTitle);
-    this.r.navigate(['/bewerben'], { state: { id: this.message._id } });
+    alert(this.message._id);
+    this.r.navigate(['/'], { state: { id: this.message._id } });
 
     
   }
