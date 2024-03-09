@@ -39,13 +39,7 @@ export class RegistrierungComponent implements OnInit {
         
         this.rg.addUser(this.registerForm.value.vorname,this.registerForm.value.nachname,this.registerForm.value.email,this.registerForm.value.passwort,this.isRecruiter);
         this.registrationSuccessful = true;
-        console.log('test');
-        //this.r.navigate(['Stellenportal']);
-        
-        //Zugriff auf Email über: this.registerForm.value.vorname
-        //Serviceaufruf(vorname,nachname,geburtsdatum,email,telefonnummer,strasse,hausnummer,ort,postleitzahl,passwort,isRecruiter) -> Rückgabewert: registrationSuccess = true
-        //if(success == true && isRecruiter){Route weiter zum Bewerberportal bzw. Stellenpflege}
-        //else(Reload, um Felder zurückzusetzen)
+
       }
       else{
         alert('Eingabedaten sind fehlerhaft.');

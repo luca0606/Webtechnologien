@@ -18,7 +18,7 @@ export class TestBackendService {
     })
   }
 
-  addUser() {
+  addUser(userData) {
     let user = {
       firstname: "test",
       lastname: "I am from angular frontend",
@@ -31,4 +31,6 @@ export class TestBackendService {
       });
 
   }
+
+
 }

@@ -6,23 +6,19 @@ import { AuthModel } from './auth-model';
 export class AuthService {
   constructor(private http: HttpClient) { }
 
-  registrieren(email: string, password: string) {
-    console.log("hi")
-    const authData: AuthModel = { username: email, password: password };
-
-    this.http
-      .post('http://localhost:4200/registrierung/', authData)
-      .subscribe((res) => {
-        //registrierung Kontrolle
-        console.log(res);
-      });
+  registrieren() {
+   //Email-Validierung
   }
 
   anmelden(email: string, password: string) {
     const authData: AuthModel = { username: email, password: password };
-
+    //Serviceaufruf (Backend): 
+    //1. get Email & password (Frontend)
+    //2. Eingabe-Pw-Verschlüsselung (Frontend)
+    //3. Vergleich der Hash-strings
+    
     this.http
-      .post('http://localhost:4200/anmdelung/', authData)
+      .post('http://localhost:4200/anmeldung/', authData)
       .subscribe((res) => {
         //login Kontrolle
         console.log(res);

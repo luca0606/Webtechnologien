@@ -5,19 +5,21 @@ import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
 import { TestComponent } from './testbackend/test/test.component';
 import { StellenportalComponent } from './stellenportal/stellenportal.component';
-
+import { BewerberlisteComponent } from './bewerberliste/bewerberliste.component';
+import { BewerbenComponent } from './bewerben/bewerben.component';
 
 const routes: Routes = [
   { path: '', component: StartseiteComponent },
   { path: 'anmeldung', component: AnmeldungComponent },
   { path: 'registrierung', component: RegistrierungComponent },
-  { path: 'Stellenportal', component: StellenportalComponent},
-  { path: 'test', component: TestComponent }
+  { path: 'stellenportal', component: StellenportalComponent },
+  { path: 'test', component: TestComponent },
+  { path: 'bewerberliste', component: BewerberlisteComponent },
+  { path: 'bewerben', component: BewerbenComponent },
 ];
 
 @NgModule({
-
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
