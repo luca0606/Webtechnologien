@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class StellenportalComponent {
   jobList: any[];
   unfilteredjobList: any[];
+  isJobListLoaded: boolean = false;
 
   constructor(private stellenService: StellenService, private r: Router) { }
 
@@ -17,18 +18,20 @@ export class StellenportalComponent {
   ngOnInit() {
     this.buildJobList();
     // todo: Build filter here and give it to filter component
+
+  }
+
+  ngOnChanges() {
   }
 
   buildJobList() {
     this.stellenService.getJobList().subscribe(
-      (res) => {
-        // Verarbeiten Sie das Ergebnis hier
-        this.unfilteredjobList = res;
+      async (res) => {
+        this.unfilteredjobList = await res;
         this.jobList = this.unfilteredjobList.filter(job => job.vacancyActive == true);
-        console.log('Ergebnis der Anfrage:', this.jobList);
+        this.isJobListLoaded = true;
       },
       (err) => {
-        // Fehlerbehandlung hier
         console.error('Fehler bei der Anfrage:', err);
       }
     );
@@ -52,7 +55,7 @@ export class StellenportalComponent {
   }
 
   onJobListFiltered(filteredJobList: any[]) {
-    this.jobList = filteredJobList; // Child component'ten gelen filtrelenmiş listeyi kullan
+    this.jobList = filteredJobList;
   }
 
 

@@ -15,21 +15,66 @@
         border-radius: 4px;
         font-size: 14px;
     }
+}
 
-    .btn-save,
-    .btn-reset,
-    .btn-show {
-        padding: 10px 20px;
-        margin: 5px;
-        border: none;
-        border-radius: 4px;
-        font-size: 14px;
-        cursor: pointer;
-        background-color: #ddd;
-        transition: background-color 0.3s ease;
 
-        &:hover {
-            background-color: #ccc;
-        }
+
+
+.savedFilters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; // Filtreler arasında biraz boşluk bırakır
+    background-color: #f7f7f7; // Ana div'in arka plan rengi
+    padding: 20px;
+
+    .activeFilter {
+        background-color: #e7e7e7; // Aktif filtrelerin arka plan rengi
+    }
+}
+
+.savedFilter {
+    padding: 10px;
+    border-radius: 5px; // Hafif yuvarlak köşeler
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Hafif bir gölge ekler
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.filterItem {
+    display: flex;
+    align-items: center;
+}
+
+.filterLabel {
+    font-weight: bold;
+    margin-right: 5px; // Etiket ve değer arasında biraz boşluk bırakır
+    color: #555; // Etiket metin rengi
+}
+
+.filterValue {
+    color: #333; // Değer metin rengi
+}
+
+
+.btn-save,
+.btn-reset,
+.btn-show,
+.btn-filter,
+.btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #ddd;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #ccc;
     }
 }

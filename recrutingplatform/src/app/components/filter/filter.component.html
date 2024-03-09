@@ -1,32 +1,102 @@
 <div class="filter-bar">
-    <!-- Job Title -->
-    <input type="text" class="search-input" placeholder="Jobtitel suchen...">
+    <input
+        type="text"
+        class="search-input"
+        placeholder="Jobtitel suchen..."
+        [(ngModel)]="filter.title"
+        (input)="applyFilters()"
+    >
 
-    <!-- Job Requirements -->
-    <input type="text" class="search-input" placeholder="Anforderungen suchen...">
+    <input
+        type="text"
+        class="search-input"
+        placeholder="Requirements suchen..."
+        [(ngModel)]="filter.requirement"
+        (input)="applyFilters()"
+    >
 
-    <!-- Location -->
-    <select class="filter" [(ngModel)]="filter.locations">
+    <select
+        class="filter"
+        [(ngModel)]="filter.location"
+        (change)="applyFilters()"
+    >
         <option value="">Stadt wählen</option>
-        <option *ngFor="let location of filter.locations" [value]='location'>{{ location }}</option>
+        <option
+            *ngFor="let location of locations"
+            [value]='location'
+        >{{ location }}</option>
     </select>
 
-    <!-- Salary Range -->
-    <!-- Basitlik adına, burada sabit değerler kullanıyorum. Gerçek bir uygulamada, bu değerleri de dinamik olarak belirlemeniz gerekebilir. -->
-    <!-- <select class="filter" [(ngModel)]="filter.salary">
+    <select
+        class="filter"
+        [(ngModel)]="filter.salaryRange"
+        (change)="applyFilters()"
+    >
         <option value="">Gehalt wählen</option>
-        <option value="0-50000">Unter 50.000</option>
-        <option value="50000-100000">50.000 bis 100.000</option>
-        <option value="100001-150000">100.001 bis 150.000</option>
-    </select> -->
+        <option value="0-50000">
+            Unter 50.000
+        </option>
+        <option value="50000-100000">
+            50.000 bis 100.000
+        </option>
+        <option value="100001-150000">
+            100.001 bis 150.000
+        </option>
+    </select>
 
-    <!-- Vacancy Active -->
-    <!-- <select class="filter" [(ngModel)]="filter.vacancyActive">
-        <option value="">Aktivitätsstatus wählen</option>
-        <option [value]="true">Aktiv</option>
-        <option [value]="false">Inaktiv</option>
-    </select> -->
+    <!-- <button
+        class="btn-filter"
+        (click)="applyFilters()"
+    >Filter anwenden</button> -->
+    <button
+        class="btn"
+        (click)="saveFilter(filter)"
+    >
+        Filter Speichern / Aktualisieren
+    </button>
+    <button
+        class="btn-reset"
+        (click)="resetFilters()"
+    >
+        Filter zurücksetzen
+    </button>
+</div>
+<div
+    class="savedFilters"
+    *ngFor="let savedFilter of savedFilters"
+>
+    <div
+        class="savedFilter"
+        [ngClass]="{'activeFilter': savedFilter.filterSelected}"
+    >
+        <div class="filterItem">
+            <span class="filterLabel">Titel:</span>
+            <span class="filterValue">{{ savedFilter.title }}</span>
+        </div>
+        <div class="filterItem">
+            <span class="filterLabel">Anforderung:</span>
+            <span class="filterValue">{{ savedFilter.requirement }}</span>
+        </div>
+        <div class="filterItem">
+            <span class="filterLabel">Ort:</span>
+            <span class="filterValue">{{ savedFilter.location }}</span>
+        </div>
+        <div class="filterItem">
+            <span class="filterLabel">Gehaltsspanne:</span>
+            <span class="filterValue">{{ savedFilter.salaryRange }}</span>
+        </div>
+        <button
+            class="btn btn-filter"
+            (click)="useSavedFilter(savedFilter)"
+        >
+            Anwenden
+        </button>
+        <button
+            class="btn btn-delete"
+            (click)="deleteSavedFilter(savedFilter)"
+        >
+            Löschen
+        </button>
+    </div>
 
-    <button class="btn-filter" (click)="applyFilters()">Filter anwenden</button>
-    <button class="btn-reset" (click)="resetFilters()">Filter löschen</button>
 </div>

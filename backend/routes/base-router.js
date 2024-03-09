@@ -1,5 +1,6 @@
 const express = require('express')
 const Validator = require('async-validator').default
+const mongoose = require('mongoose')
 
 class BaseRouter {
     constructor(model, service, descriptor = {}) {
@@ -22,7 +23,6 @@ class BaseRouter {
         })
 
         this.router.post('/', async (req, res) => {
-            console.log("???")
             try {
                 await this.validator.validate(req.body)
             } catch ({ errors }) {
@@ -58,9 +58,12 @@ class BaseRouter {
         })
 
         this.router.delete('/:id', async (req, res) => {
-            await service.removeBy('_id', req.params.id)
-
-            res.status(200).send("Data is successfully deleted.")
+            try {
+                const result = await service.removeBy('_id', req.params.id)
+                res.status(200).send(result)
+            } catch (error) {
+                return res.status(500).send(error)
+            }
         })
     }
 
