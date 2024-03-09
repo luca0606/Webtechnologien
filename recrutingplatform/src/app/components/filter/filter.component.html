@@ -6,6 +6,7 @@
         [(ngModel)]="filter.title"
         (input)="applyFilters()"
     >
+    <span><button (click)="sortJobsByTitle()">Sort nach Title</button></span>
 
     <input
         type="text"
@@ -14,6 +15,7 @@
         [(ngModel)]="filter.requirement"
         (input)="applyFilters()"
     >
+    <span><button (click)="sortJobsByRequirement()">Sort</button></span>
 
     <select
         class="filter"
@@ -26,6 +28,7 @@
             [value]='location'
         >{{ location }}</option>
     </select>
+    <span><button (click)="sortJobsByLocation()">Sort</button></span>
 
     <select
         class="filter"
@@ -43,6 +46,7 @@
             100.001 bis 150.000
         </option>
     </select>
+    <span><button (click)="sortJobsBySalary()">Sort</button></span>
 
     <!-- <button
         class="btn-filter"
