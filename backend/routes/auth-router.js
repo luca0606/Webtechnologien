@@ -2,6 +2,7 @@ const { AuthService } = require('../services')
 const BaseRouter = require('./base-router')
 const AuthModel = require("../models/auth")
 
+
 class AuthRouter extends BaseRouter {
 
     constructor(AuthModel, AuthService) {
@@ -15,7 +16,8 @@ class AuthRouter extends BaseRouter {
                 const token = await this.service.authenticate(email, password)
                 // Jwt token can be used for each request if it is needed.
                 if (token) {
-                    res.status(200).send(true);
+                    const user = await this.service.getUserFromUserModelByEmail(email)
+                    res.status(200).send(user);
                 }
             } catch (error) {
                 return res.status(500).send(error)

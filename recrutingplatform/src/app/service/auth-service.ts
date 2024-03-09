@@ -22,11 +22,10 @@ export class AuthService {
     //Login request (Backend): 
     this.http.post(`${BASE_URL}auth/login/`, authData)
       .subscribe((res) => {
-        // console.log(res);
         if (res) {
           localStorage.setItem("loggedIn", "true")
           this.dataService.updateIsLoggedIn(true);
-          this.router.navigate(['stellenportal'])
+          this.router.navigate(['stellenportal'], { state: { user: res } })
 
         }
       })

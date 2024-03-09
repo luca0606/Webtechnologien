@@ -1,4 +1,5 @@
 const AuthModel = require("../models/auth")
+const UserModel = require("../models/user")
 const BaseService = require("./base-service")
 const jwt = require('jsonwebtoken')
 const { SECRET_KEY } = require('../config')
@@ -36,6 +37,17 @@ class AuthService extends BaseService {
 
         return false
     }
+
+    async getUserFromUserModelByEmail(email) {
+        try {
+            const user = await UserModel.findOne({ email: email });
+            return user;
+        } catch (error) {
+            console.error("Error By User Search:", error);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = new AuthService(AuthModel)
