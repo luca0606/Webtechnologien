@@ -6,7 +6,19 @@
       <p><strong>Benefits:</strong><br>{{ message.benefits }}</p>
       <p><strong>Ort:</strong> {{ message.location }}</p>
       <p><strong>Gehaltsrange:</strong> {{ message.salaryRangeMin }}€ - {{ message.salaryRangeMax }}€</p>
-      <button class="apply-button" (click)="apply()">Jetzt Bewerben!</button>    
+      <button
+      class="apply-button"
+      (click)="apply()"
+      *ngIf="!user.recruiterRole">Bewerben
+      </button>
+      <button
+       class="apply-button"
+      *ngIf="user.recruiterRole"
+      (click)="editJob()">Stelle Pflege
+  
+      </button>
+    
+          
     </div>
   </section>
 

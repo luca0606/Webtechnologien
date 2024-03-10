@@ -12,8 +12,14 @@ export class StellenComponent {
   //message hält die empfangenen Daten vom Parent Component
   message: any;
   subscription: Subscription;
+  user = undefined;
 
-  constructor(private stellenService:StellenService,private r:Router){}
+  constructor(private stellenService:StellenService,private r:Router){
+    const navigation = this.r.getCurrentNavigation();
+    this.user = navigation?.extras.state["user"]
+    // You have here user data from the login
+    // You can use user.recruiterRole to check if the u
+  }
 
   ngOnInit() {
     //Prüft zunächst ob gespeicherte Daten im lokalen Speicher sind
@@ -47,9 +53,11 @@ export class StellenComponent {
   apply() {
     //Click auf "Jetzt Bewerben" Button
     alert(this.message._id);
-    this.r.navigate(['/'], { state: { id: this.message._id } });
-
-    
+    //this.r.navigate(['/bewerben'], { state: { id: this.message._id } }); 
+  }
+  editJob(){
+    alert(this.message._id);
+    this.r.navigate(['/'], { state: { id: this.message._id } }); 
   }
 }
 

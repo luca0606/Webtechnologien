@@ -14,7 +14,7 @@ export class RegistrierungService {
     return hashPassword;
   }
 
-  addUser(firstName: string, lastName: string, email: string, password: string, role: boolean) {
+  addUser(firstName: string, lastName: string, email: string, role: boolean) {
     let user = {
       firstname: firstName,
       lastname: lastName,
@@ -48,6 +48,7 @@ export class RegistrierungService {
 
     this.http.post("http://localhost:3000/auth/", user).subscribe(res => {
       console.log(res)
+      console.log('AuthData added')
     })
   }
 }

@@ -14,6 +14,7 @@ import { BewerberlisteComponent } from './bewerberliste/bewerberliste.component'
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { StellenpflegeComponent } from './stellenpflege/stellenpflege.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FilterComponent } from './components/filter/filter.component';
     HeaderComponent,
     FooterComponent,
     FilterComponent,
+    StellenpflegeComponent,
   ],
   imports: [
     BrowserModule,

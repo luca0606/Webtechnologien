@@ -11,6 +11,7 @@ import { TestComponent } from './testbackend/test/test.component';
 import { StellenportalComponent } from './stellenportal/stellenportal.component';
 import { BewerberlisteComponent } from './bewerberliste/bewerberliste.component';
 import { StellenComponent } from './stellen/stellen.component';
+import { StellenpflegeComponent } from './stellenpflege/stellenpflege.component';
 
 // Extras
 import { AuthGuard } from './authGuard';
@@ -27,7 +28,8 @@ const routes: Routes = [
       { path: 'stellenportal', component: StellenportalComponent },
       { path: 'test', component: TestComponent, canActivate: [AuthGuard] },
       { path: 'bewerberliste', component: BewerberlisteComponent },
-      { path: 'stellenanzeige', component: StellenComponent}
+      { path: 'stellenanzeige', component: StellenComponent},
+      { path: 'stellenpflege', component: StellenpflegeComponent},
 
     ]
   }

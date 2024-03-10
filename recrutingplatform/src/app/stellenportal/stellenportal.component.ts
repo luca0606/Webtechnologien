@@ -38,6 +38,8 @@ export class StellenportalComponent {
   }
 
   buildJobList() {
+    //Hole nur aktive Stellenanzeigen für Bewerbersicht
+    if(!this.user.recruiterRole){
     this.stellenService.getJobList().subscribe(
       async (res) => {
         this.unfilteredjobList = await res;
@@ -47,7 +49,20 @@ export class StellenportalComponent {
       (err) => {
         console.error('Fehler bei der Anfrage:', err);
       }
-    );
+      );
+    }
+    //Hole alle Anzeigen für Recruitersicht
+    else{
+      this.stellenService.getJobList().subscribe(
+        async (res) => {
+          this.jobList = await res;
+          this.isJobListLoaded = true;
+        },
+        (err) => {
+          console.error('Fehler bei der Anfrage:', err);
+        }
+        );
+    }
 
   }
 
@@ -79,5 +94,8 @@ export class StellenportalComponent {
   apply(job:any) {
     alert(job._id);
     //this.r.navigate(['/'], { state: { id: job._id } });
+  }
+  editJob(job:any){
+    this.r.navigate(['/stellenpflege'], { state: { id: job._id } });
   }
 }

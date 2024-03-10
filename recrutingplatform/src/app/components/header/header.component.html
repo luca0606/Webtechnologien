@@ -3,7 +3,7 @@
         <ul>
             <li><a routerLink="/">Start</a></li>
             <li *ngIf="!isLoggedIn"><a routerLink="/anmeldung">Anmeldung</a></li>
-            <li *ngIf="isLoggedIn"><a routerLink="/stellenportal">Stellenportal </a></li>
+            <li *ngIf="isLoggedIn"><a routerLink="/stellenportal">Stellenportal</a></li>
             <button *ngIf="isLoggedIn" (click)="abmelden()">Abmelden</button>
         </ul>
     </nav>
