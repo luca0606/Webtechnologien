@@ -12,8 +12,10 @@ export class DataService {
 
   private isLoggedIn = new BehaviorSubject<boolean>(this.getIsLoggedInFromLocalStorage());
   currentIsLoggedIn = this.isLoggedIn.asObservable();
+  private user = new BehaviorSubject<any>(this.getUserFromLocalStorage());
+  user$ = this.user.asObservable();
   constructor() {
-    // this.listenToLocalStorageChangesForIsLoggedIn()
+
   }
 
   getIsLoggedIn() {
@@ -24,20 +26,37 @@ export class DataService {
     this.isLoggedIn.next(value);
   }
 
-  // DEPRECATED: Just keeping it if we need it later. I am not sure about the implementation of login and logout
-  // I think we will not need it. Lets see if there is a problem
-  private listenToLocalStorageChangesForIsLoggedIn() {
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'isLoggedIn') {
-        this.isLoggedIn.next(this.getIsLoggedInFromLocalStorage());
-      }
-    });
-  }
-
   private getIsLoggedInFromLocalStorage() {
     const isLoggedIn = localStorage.getItem("loggedIn")
     return isLoggedIn == "true"
   }
+
+
+  // create a function to share user data with other components
+  getUser() {
+    return this.user.asObservable();
+  }
+
+  // create a function to update user data
+  updateUser(user: any) {
+    this.user.next(user);
+    // this.saveUserToLocalStorage(user);
+    return this.user.asObservable();
+  }
+
+  //save user to the local storage
+  saveUserToLocalStorage(user: any) {
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  //get user from the local storage
+  getUserFromLocalStorage() {
+    const user = localStorage.getItem("user")
+    return user ? JSON.parse(user) : null
+  }
+
+
+
 
 
 }

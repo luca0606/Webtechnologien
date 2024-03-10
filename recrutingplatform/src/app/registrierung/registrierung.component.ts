@@ -34,20 +34,35 @@ export class RegistrierungComponent implements OnInit {
   }
 
   onSubmit() {
-
     if (this.registerForm.valid) {
+      try {
+        this.rg.addUser(
+          this.registerForm.value.vorname,
+          this.registerForm.value.nachname,
+          this.registerForm.value.email,
+          this.registerForm.value.passwort,
+          this.isRecruiter
+        );
 
-      this.rg.addUser(this.registerForm.value.vorname, this.registerForm.value.nachname, this.registerForm.value.email, this.registerForm.value.passwort, this.isRecruiter);
-      this.rg.addUserAuthData(this.registerForm.value.email, this.registerForm.value.passwort);
-      this.registrationSuccessful = true;
-      // send user automatically anmeldung route after registration
-      // clear form after registration
+        this.rg.addUserAuthData(
+          this.registerForm.value.email,
+          this.registerForm.value.passwort
+        );
 
-    }
-    else {
+        this.registrationSuccessful = true;
+        // navigate to the login page after successful registration
+        this.r.navigate(['/anmeldung']);
+        // reset the form after successful registration
+        this.registerForm.reset();
+      } catch (error) {
+        console.error('Registration failed:', error);
+        alert('Registrierung fehlgeschlagen. Bitte versuchen Sie es später erneut.');
+      }
+    } else {
       alert('Eingabedaten sind fehlerhaft.');
     }
   }
+
   toggleRole(): void {
     console.log(this.isRecruiter);
     this.isRecruiter = !this.isRecruiter;

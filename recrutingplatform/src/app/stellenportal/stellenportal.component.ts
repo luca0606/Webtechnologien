@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { StellenService } from '../service/stellen.service';
+import { DataService } from '../service/data.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stellenportal',
@@ -11,22 +13,28 @@ export class StellenportalComponent {
   jobList: any[];
   unfilteredjobList: any[];
   isJobListLoaded: boolean = false;
-  user = null;
-  constructor(private stellenService: StellenService, private r: Router) {
-    const navigation = this.r.getCurrentNavigation();
-    this.user = navigation?.extras.state["user"]
-    // You have here user data from the login
-    // You can use user.recruiterRole to check if the user is a recruiter
-  }
+  user: any = null;
 
+  subscription: Subscription = new Subscription();
+
+  constructor(
+    private stellenService: StellenService,
+    private r: Router,
+    private dataService: DataService,
+
+  ) { }
 
   ngOnInit() {
     this.buildJobList();
-    // todo: Build filter here and give it to filter component
 
+    // get user from data service
+    this.subscription = this.dataService.user$.subscribe(user => {
+      this.user = user;
+    });
   }
 
-  ngOnChanges() {
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   buildJobList() {
@@ -62,7 +70,6 @@ export class StellenportalComponent {
   onJobListFiltered(filteredJobList: any[]) {
     this.jobList = filteredJobList;
   }
-
 
   openJob(job: any) {
     this.stellenService.sendJobData(job) //Alle damit Stellenliste

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const uniqueValidator = require("mongoose-unique-validator");
 
 const BaseOption = {
     discriminatorKey: "user",
@@ -15,5 +16,6 @@ const UserSchema = new mongoose.Schema({
     BaseOption
 )
 
+UserSchema.plugin(uniqueValidator);
 module.exports = mongoose.model("UserModel", UserSchema)
 
