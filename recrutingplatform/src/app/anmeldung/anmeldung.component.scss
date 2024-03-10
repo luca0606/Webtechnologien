@@ -1,120 +1,26 @@
-body {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-  }
-  
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-  
-  nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  nav li {
-    margin-right: 1rem;
-    display: flex;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  section {
-    margin-top: 4rem;
-    margin-bottom: 20%;
-  
-    flex: 1; /* Fülle den verfügbaren Raum aus */
-  }
-  
-  footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    width: 100%;
-    position: absolute;
-    top:900px;
+ /* Formular */
+      html{
+        height: 100%;
+      }     
 
-  
-    /* Toggle */
-  }
+      section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        top: 250px;
+      }
+ 
+      #login {
+        width: 500px;
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
 
-  .toggle-container {
-    display: inline-block;
-    position: relative;
-  }
-  
-  .toggle-label {
-    display: block;
-    cursor: pointer;
-    width: 120px; /* Adjust width as needed */
-    height: 40px; /* Adjust height as needed */
-    background-color: #ccc;
-    border-radius: 20px;
-    transition: background-color 0.2s;
-  }
-  
-  .toggle-label:before {
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    right: 4px;
-    bottom: 4px;
-    background-color: #fff;
-    border-radius: 18px;
-    transition: all 0.3s;
-  }
-  
-  .toggle-slider {
-    position: absolute;
-    background-color: #2196F3;
-    border-radius: 20px;
-    transition: 0.3s;
-    width: 50%;
-    height: 100%;
-    text-align: center;
-    line-height: 40px; /* Same as height of the toggle-label */
-  }
-  
-  #toggle-button {
-    display: none; /* Hide the default checkbox */
-  }
-  
-  #toggle-button:checked + .toggle-label .toggle-slider {
-    transform: translateX(100%);
-  }
-  
-  #toggle-button:checked + .toggle-label {
-    background-color: #ccc; /* Color when toggled */
-  }
-  
-  .slider-text {
-    color: #fff;
-    pointer-events: none;
-  }
-
-     /* Formular */
      .login-container {
         max-width: 300px;
         margin: auto;
@@ -131,17 +37,22 @@ body {
       }
       
       input {
-        width: 15%;
+        width: 100%;
         padding: 0.5em;
         margin-top: 0.5em;
       }
       
+      #buttonGroup {
+        width: 250px;
+        display: flex;
+        flex-direction: row;
+      }
+
       button {
         padding: 0.5em 1em;
-        width: 5%;
+        width: 50%;
         margin-top: 1em;
         margin-right: 1em;
-
       }
       
       .text-danger {

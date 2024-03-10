@@ -24,13 +24,14 @@
     <p class="location">{{ job.location }}</p>
     <!-- Hier könnten Sie z.B. Buttons oder Links für "Mehr erfahren" oder "Bewerben" hinzufügen -->
     <button
+      *ngIf="!user.recruiterRole" 
       class="apply-button"
       (click)="apply(job)"
-      *ngIf="!user.recruiterRole"
+      
     >Bewerben</button>
     <button
-      class="apply-button"
       *ngIf="user.recruiterRole"
+      class="apply-button"
       (click)="editJob(job)"
     >
       Stelle Pflegen
