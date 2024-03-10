@@ -7,14 +7,15 @@
       <p><strong>Ort:</strong> {{ message.location }}</p>
       <p><strong>Gehaltsrange:</strong> {{ message.salaryRangeMin }}€ - {{ message.salaryRangeMax }}€</p>
       <button
-      class="apply-button"
-      (click)="apply()"
-      *ngIf="!user.recruiterRole">Bewerben
+      *ngIf="!user.recruiterRole"
+        class="apply-button"
+        (click)="apply()"
+      >Bewerben
       </button>
       <button
       *ngIf="user.recruiterRole"
-       class="apply-button"
-      (click)="editJob()">Stelle Pflege
+        class="apply-button"
+        (click)="editJob()">Stelle pflege
       </button>    
     </div>
   </section>

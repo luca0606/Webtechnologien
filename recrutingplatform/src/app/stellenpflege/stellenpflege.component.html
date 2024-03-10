@@ -1,0 +1,51 @@
+<div *ngIf="job" class="edit-container">
+    <h2>Stellenpflege</h2>
+
+    <form [formGroup]="editForm">
+
+     <div class="form-group">
+      <label for="jobTitle">Jobtitel:</label>
+      <input type="text" id="jobTitle" class="form-control" formControlName="jobTitle" placeholder="Jobtitel">
+    </div>
+
+    <div class="form-group">
+      <label for="jobDescription">Jobbeschreibung:</label>
+      <textarea id="jobDescription" class="form-control" formControlName="jobDescription" placeholder="Jobbeschreibung"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="jobRequirements">Jobanforderungen:</label>
+      <textarea id="jobRequirements" class="form-control" formControlName="jobRequirements" placeholder="Jobanforderungen"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="benefits">benefits:</label>
+      <textarea id="benefits" class="form-control" formControlName="benefits" placeholder="Benefits"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Standort:</label>
+      <input type="text" id="location" class="form-control" formControlName="location" placeholder="Standort">
+    </div>
+
+    <div class="form-group">
+      <label for="salaryRangeMax">Gehaltsspanne (Max.):</label>
+      <input type="number" id="salaryRangeMax" class="form-control" formControlName="salaryRangeMax" placeholder="Gehaltsspanne (Max.)">
+    </div>
+    
+    <div class="form-group">
+      <label for="salaryRangeMin">Gehaltsspanne (Min.):</label>
+      <input type="number" id="salaryRangeMin" class="form-control" formControlName="salaryRangeMin" placeholder="Gehaltsspanne (Min.)">
+    </div>
+
+
+    <div class="form-group">
+        <label for="vacancyActive">Aktive Anzeige:</label>
+        <input type="checkbox" id="vacancyActive" class="form-control" formControlName="vacancyActive">
+      </div>
+  
+      <button type="button" (click)="saveChanges()">Änderungen speichern</button>
+      <button type="button" >Stelle löschen</button>
+    </form>
+  
+  </div>

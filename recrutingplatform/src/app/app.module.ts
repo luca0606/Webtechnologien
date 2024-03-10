@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { StellenpflegeComponent } from './stellenpflege/stellenpflege.component';
+import { StellenComponent } from './stellen/stellen.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { StellenpflegeComponent } from './stellenpflege/stellenpflege.component'
     FooterComponent,
     FilterComponent,
     StellenpflegeComponent,
+    StellenComponent,
   ],
   imports: [
     BrowserModule,

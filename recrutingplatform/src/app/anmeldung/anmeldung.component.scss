@@ -16,9 +16,14 @@
       #login {
         width: 500px;
         display:flex;
+        padding: 40px;
         justify-content: center;
         flex-direction: column;
         align-items: center;
+        background: #f9f9f9;
+         border: 1px solid #ebebeb;
+        border-radius: 4px;
+        
       }
 
      .login-container {

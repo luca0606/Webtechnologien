@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { StellenService } from '../service/stellen.service';
+import { DataService } from '../service/data.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-stellen',
@@ -12,18 +15,25 @@ export class StellenComponent {
   //message hält die empfangenen Daten vom Parent Component
   message: any;
   subscription: Subscription;
-  user = undefined;
 
-  constructor(private stellenService:StellenService,private r:Router){
-    const navigation = this.r.getCurrentNavigation();
-    this.user = navigation?.extras.state["user"]
-    // You have here user data from the login
-    // You can use user.recruiterRole to check if the u
+  //Aktiver User
+  user:any;;
+  userSubscription: Subscription = new Subscription();
+  
+
+  constructor(private stellenService:StellenService,
+              private r:Router,
+              private dataService: DataService){
   }
 
   ngOnInit() {
     //Prüft zunächst ob gespeicherte Daten im lokalen Speicher sind
     const savedJob = localStorage.getItem('job');
+
+    this.userSubscription = this.dataService.user$.subscribe(user => {
+      this.user = user;
+    });
+
     if(savedJob){
       this.message = JSON.parse(savedJob);
     }
@@ -31,7 +41,6 @@ export class StellenComponent {
     this.subscription = this.stellenService.currentData.subscribe(message => {
       this.message = message;
     });
-    console.log(this.message)
     this.saveJobToLocalStorage();
    }
   }
@@ -43,6 +52,7 @@ export class StellenComponent {
     }
     //Zwischen Daten werden gelöscht, sonst werden immer diese Anzeigedaten angezeigt
     localStorage.removeItem('job');
+
   }
   
   saveJobToLocalStorage() {
@@ -51,13 +61,13 @@ export class StellenComponent {
   }
 
   apply() {
-    //Click auf "Jetzt Bewerben" Button
-    alert(this.message._id);
-    //this.r.navigate(['/bewerben'], { state: { id: this.message._id } }); 
-  }
-  editJob(){
+    //Klick auf "Jetzt Bewerben" Button
     alert(this.message._id);
     this.r.navigate(['/'], { state: { id: this.message._id } }); 
+  }
+  editJob(){
+    //Klick auf Stelle pflegen
+    this.r.navigate(['/stellenpflege'], { state: { id: this.message._id } });
   }
 }
 

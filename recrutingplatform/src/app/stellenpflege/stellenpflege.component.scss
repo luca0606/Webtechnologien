@@ -1,36 +1,87 @@
-job-details-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .job-details-container h2 {
-    margin-top: 0;
-  }
-  
-  .job-details-container p {
-    margin-top: 10px;
-    line-height: 2;
-  }
-  
-  .job-details-container strong {
-    font-weight: bold;
+html{
+  height: 100vh;
+}
+.edit-container {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  padding: 30px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 70px;
+
+  h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
   }
 
-  .apply-button {
-    display: inline-block;
-    background: #007bff;
-    color: white;
+  .form-group {
+    margin-bottom: 10px;
+
+    label {
+      display: block;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 97%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      color: #333;
+
+      &:focus {
+        border-color: #80bdff;
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+  }
+
+  button {
     padding: 10px 20px;
+    font-size: 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 1em;
-  
+    margin-right: 10px;
+
     &:hover {
-      background: #0056b3;
+      opacity: 0.9;
     }
   }
+
+  button[type="button"] {
+    background-color: #007bff;
+    color: white;
+
+    &:last-child {
+      background-color: #dc3545;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 767px) {
+  .edit-container {
+    padding: 10px;
+    box-shadow: none;
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  }
+}

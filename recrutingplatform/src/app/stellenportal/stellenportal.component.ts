@@ -13,7 +13,7 @@ export class StellenportalComponent {
   jobList: any[];
   unfilteredjobList: any[];
   isJobListLoaded: boolean = false;
-  user: any = null;
+  user:any =undefined;
 
   subscription: Subscription = new Subscription();
 
@@ -25,12 +25,12 @@ export class StellenportalComponent {
   ) { }
 
   ngOnInit() {
-    this.buildJobList();
 
     // get user from data service
     this.subscription = this.dataService.user$.subscribe(user => {
       this.user = user;
     });
+    this.buildJobList();
   }
 
   ngOnDestroy() {

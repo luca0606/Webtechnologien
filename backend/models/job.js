@@ -6,8 +6,8 @@ const jobSchema = new mongoose.Schema({
     jobRequirements: String,
     jobTitle: String,
     location: String,
-    salaryRangeMin: Number,
     salaryRangeMax: Number,
+    salaryRangeMin: Number,
     vacancyActive: Boolean
 },
     { collection: "jobs" }
