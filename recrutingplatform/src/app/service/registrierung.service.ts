@@ -11,7 +11,6 @@ export class RegistrierungService {
 
   hashPassword(password: string) {
     let hashPassword = CryptoJS.SHA256(password).toString();
-    console.log(hashPassword);
     return hashPassword;
   }
 
@@ -23,11 +22,18 @@ export class RegistrierungService {
       // password: this.hashPassword(password),
       recruiterRole: role
     }
-
-    this.http.post("http://localhost:3000/user/", user)
-      .subscribe((res) => {
-        console.log(res)
-      });
+    try {
+      this.http.post("http://localhost:3000/user/register", user)
+        .subscribe((res) => {
+          console.log(res)
+        })
+    } catch (error) {
+      console.log(error)
+    }
+    // this.http.post("http://localhost:3000/user/", user)
+    //   .subscribe((res) => {
+    //     console.log(res)
+    //   })
 
   }
   /**
@@ -35,9 +41,6 @@ export class RegistrierungService {
    */
   addUserAuthData(email: string, password: string) {
 
-    console.log("hi addUserAuthData")
-    console.log(password)
-    console.log("before hash")
     let user = {
       email: email,
       password: this.hashPassword(password)
