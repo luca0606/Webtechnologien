@@ -1,6 +1,6 @@
 const { FilterService } = require('../services')
 const BaseRouter = require('./base-router')
-const { FilterSchema } = require("../models/user")
+const { FilterSchema } = require("../models/filter")
 
 class FilterRouter extends BaseRouter {
 

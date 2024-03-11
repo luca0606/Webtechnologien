@@ -30,11 +30,6 @@ export class RegistrierungService {
     } catch (error) {
       console.log(error)
     }
-    // this.http.post("http://localhost:3000/user/", user)
-    //   .subscribe((res) => {
-    //     console.log(res)
-    //   })
-
   }
   /**
    * 
