@@ -20,32 +20,6 @@ export class StellenService {
     return this.http.get(`${BASE_URL}job`);
   }
 
-
-  // Funktionen für Recruitersicht
-  addJob(jobTitle:String, jobDescription:String, jobRequirements:String, location:String, benefits:String, salaryRangeMin:Number, salaryRangeMax:Number, vacancyActive:Boolean){
-
-    let job = {
-      benefits: benefits,
-      jobDescription: jobDescription,
-      jobRequirements: jobRequirements,
-      jobTitle: jobTitle,
-      location: location,
-      salaryRangeMin: salaryRangeMin,
-      salaryRangeMax: salaryRangeMax,
-      vacancyActive: vacancyActive
-  }
-
-
-
-  console.log(job);
-  this.http.post(`${BASE_URL}job/`, job)
-      .subscribe((res) => {
-        return true;
-        console.log(res);
-      });
-
-  }
-
   sendJobData(message:any){
     this.jobData.next(message) //Datenübergabe an den nächsten Component
   }

@@ -1,41 +1,41 @@
-<div *ngIf="job" class="edit-container">
-    <h2>Stellenpflege</h2>
+<div class="edit-container" *ngIf="jobForm">
+    <h2 *ngIf="mode == 'edit'">Stelle pflegen</h2>
+    <h2 *ngIf= "mode == 'add'">Stelle hinzufügen</h2>
 
-    <form [formGroup]="editForm">
-
+    <form [formGroup]="jobForm">
      <div class="form-group">
       <label for="jobTitle">Jobtitel:</label>
-      <input type="text" id="jobTitle" class="form-control" formControlName="jobTitle" placeholder="Jobtitel">
+      <input type="text" id="jobTitle" class="form-control" formControlName='jobTitle'>
     </div>
 
     <div class="form-group">
       <label for="jobDescription">Jobbeschreibung:</label>
-      <textarea id="jobDescription" class="form-control" formControlName="jobDescription" placeholder="Jobbeschreibung"></textarea>
+      <textarea id="jobDescription" class="form-control" formControlName="jobDescription"></textarea>
     </div>
 
     <div class="form-group">
       <label for="jobRequirements">Jobanforderungen:</label>
-      <textarea id="jobRequirements" class="form-control" formControlName="jobRequirements" placeholder="Jobanforderungen"></textarea>
+      <textarea id="jobRequirements" class="form-control" formControlName="jobRequirements"></textarea>
     </div>
 
     <div class="form-group">
       <label for="benefits">benefits:</label>
-      <textarea id="benefits" class="form-control" formControlName="benefits" placeholder="Benefits"></textarea>
+      <textarea id="benefits" class="form-control" formControlName="benefits"></textarea>
     </div>
 
     <div class="form-group">
       <label for="location">Standort:</label>
-      <input type="text" id="location" class="form-control" formControlName="location" placeholder="Standort">
+      <input type="text" id="location" class="form-control" formControlName="location">
     </div>
 
     <div class="form-group">
       <label for="salaryRangeMax">Gehaltsspanne (Max.):</label>
-      <input type="number" id="salaryRangeMax" class="form-control" formControlName="salaryRangeMax" placeholder="Gehaltsspanne (Max.)">
+      <input type="number" id="salaryRangeMax" class="form-control" formControlName="salaryRangeMax">
     </div>
     
     <div class="form-group">
       <label for="salaryRangeMin">Gehaltsspanne (Min.):</label>
-      <input type="number" id="salaryRangeMin" class="form-control" formControlName="salaryRangeMin" placeholder="Gehaltsspanne (Min.)">
+      <input type="number" id="salaryRangeMin" class="form-control" formControlName="salaryRangeMin">
     </div>
 
 
@@ -44,8 +44,12 @@
         <input type="checkbox" id="vacancyActive" class="form-control" formControlName="vacancyActive">
       </div>
   
-      <button type="button" (click)="saveChanges()">Änderungen speichern</button>
-      <button type="button" >Stelle löschen</button>
+      <button type="button" (click)="onPressAdd()" *ngIf="mode == 'add'">Stelle hinzufügen</button>  
+      <button type="button" (click)="onPressSave()" *ngIf="mode == 'edit'">Änderungen speichern</button>
+      <button type="button" (click)="onPressDelete()" *ngIf="mode == 'edit'">Stelle löschen</button>
+      <span *ngIf="successfulAdd">Stelle erfolgreich hinzugefügt!</span>
+      <span *ngIf="successfulEdit">Stelle erfolgreich hinzugefügt!</span>
+      <span *ngIf="successfulDeletion">Stelle erfolgreich hinzugefügt!</span>
     </form>
   
   </div>

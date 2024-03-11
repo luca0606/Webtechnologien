@@ -10,6 +10,8 @@
     (jobListFiltered)="onJobListFiltered($event)"
     *ngIf="isJobListLoaded"
   ></app-filter>
+  
+  <button type='button' *ngIf="user.recruiterRole" id="addjobButton" class='apply-button' (click)="onPressAdd()">Stelle hinzufügen</button>
 
   <div class="job-card" *ngFor="let job of jobList" (click)="openJob(job)">
     <div class="job-header">
