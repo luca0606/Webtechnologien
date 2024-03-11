@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StellenpflegeService } from '../service/stellenpflege.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-stellenpflege',
@@ -16,6 +17,7 @@ export class StellenpflegeComponent {
   editForm: FormGroup;
 
   constructor(private r: Router, private stellenpflegeService:StellenpflegeService, private fb: FormBuilder) {
+    //Objekt ID vom Ursprungs StellenComponent
     const navigation = this.r.getCurrentNavigation();
     this.id = navigation?.extras.state?.["id"];
   }
@@ -29,7 +31,7 @@ export class StellenpflegeComponent {
   }
     
     initForm(){this.editForm = this.fb.group({
-
+      //Formular initialisieren
       benefits: [this.job.benefits],
       jobDescription: [this.job.jobDescription],
       jobRequirements: [this.job.jobRequirements],
@@ -41,17 +43,10 @@ export class StellenpflegeComponent {
     });
   }
 
-  saveChanges() {
+  async saveChanges() {
     // Wenn Sie Änderungen speichern möchten, z.B. an einen Service oder an eine API senden:
-    this.stellenpflegeService.setChanges(this.id,this.editForm.value).subscribe(
-      async (res) => {
-        console.log(res);
-        console.log('Patch erfolgreich!')
-      },
-      (err) => {
-        console.error('Fehler bei der Anfrage:', err);
-      }
-      );
-
+    if(this.id){
+      await this.stellenpflegeService.setChanges(this.id,this.editForm.value);
+    }
   }
 }
