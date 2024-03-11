@@ -13,7 +13,7 @@ export class StellenportalComponent {
   jobList: any[];
   unfilteredjobList: any[];
   isJobListLoaded: boolean = false;
-  user: any = null;
+  user:any =undefined;
 
   subscription: Subscription = new Subscription();
 
@@ -25,12 +25,12 @@ export class StellenportalComponent {
   ) { }
 
   ngOnInit() {
-    this.buildJobList();
 
     // get user from data service
     this.subscription = this.dataService.user$.subscribe(user => {
       this.user = user;
     });
+    this.buildJobList();
   }
 
   ngOnDestroy() {
@@ -38,6 +38,8 @@ export class StellenportalComponent {
   }
 
   buildJobList() {
+    //Hole nur aktive Stellenanzeigen für Bewerbersicht
+    if(!this.user.recruiterRole){
     this.stellenService.getJobList().subscribe(
       async (res) => {
         this.unfilteredjobList = await res;
@@ -47,7 +49,20 @@ export class StellenportalComponent {
       (err) => {
         console.error('Fehler bei der Anfrage:', err);
       }
-    );
+      );
+    }
+    //Hole alle Anzeigen für Recruitersicht
+    else{
+      this.stellenService.getJobList().subscribe(
+        async (res) => {
+          this.jobList = await res;
+          this.isJobListLoaded = true;
+        },
+        (err) => {
+          console.error('Fehler bei der Anfrage:', err);
+        }
+        );
+    }
 
   }
 
@@ -76,8 +91,11 @@ export class StellenportalComponent {
     this.r.navigate(['/stellenanzeige']);
   }
 
-  apply() {
-    //this.r.navigate(['/bewerben']);
-    console.log('Hallo');
+  apply(job:any) {
+    alert(job._id);
+    //this.r.navigate(['/'], { state: { id: job._id } });
+  }
+  editJob(job:any){
+    this.r.navigate(['/stellenpflege'], { state: { id: job._id } });
   }
 }

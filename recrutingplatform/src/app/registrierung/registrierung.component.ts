@@ -40,7 +40,6 @@ export class RegistrierungComponent implements OnInit {
           this.registerForm.value.vorname,
           this.registerForm.value.nachname,
           this.registerForm.value.email,
-          this.registerForm.value.passwort,
           this.isRecruiter
         );
 

@@ -50,7 +50,7 @@
                 </span>
             </label>
         </div>
-        <button type="submit" [disabled]="!registerForm.valid">Registrieren</button>
+        <button *ngIf="!registrationSuccessful" type="submit" [disabled]="!registerForm.valid" >Registrieren</button>
         <div>
             <div *ngIf="registrationSuccessful">Registrierung erfolgreich!</div>
             <button *ngIf="registrationSuccessful" id='anmeldeButton' routerLink="/anmeldung">Weiter zur

@@ -1,10 +1,11 @@
 <div class="job-list">
-  <h1>Stellenportal</h1>
 
-  <h2>User Data If Usage</h2>
-  <span *ngIf="user"> {{user.recruiterRole}} -- </span>
-  <span *ngIf="user.recruiterRole">User Recruiter</span>
-  <span *ngIf="!user.recruiterRole">User Bewerber</span>
+  <span *ngIf="user.recruiterRole"><h1>Stellen-Management</h1></span>
+  <span *ngIf="!user.recruiterRole"><h1>Stellenportal</h1></span>
+
+  <span *ngIf="user.recruiterRole">Rolle: Recruiter</span>
+  <span *ngIf="!user.recruiterRole">Rolle: Bewerber</span>
+
   <app-filter
     [jobList]="jobList"
     (jobListFiltered)="onJobListFiltered($event)"
@@ -24,15 +25,17 @@
     <p class="location">{{ job.location }}</p>
     <!-- Hier könnten Sie z.B. Buttons oder Links für "Mehr erfahren" oder "Bewerben" hinzufügen -->
     <button
+      *ngIf="!user.recruiterRole" 
       class="apply-button"
-      (click)="apply()"
-      *ngIf="!user.recruiterRole"
+      (click)="apply(job)"
+      
     >Bewerben</button>
-    <button
-      class="apply-button"
-      *ngIf="user.recruiterRole"
-    >
-      Stelle Pflegen
-    </button>
+    <span *ngIf="user.recruiterRole">
+      <button
+        class="apply-button"
+        (click)="editJob(job)">
+        Stelle Pflegen
+      </button>
+  </span>
   </div>
 </div>
