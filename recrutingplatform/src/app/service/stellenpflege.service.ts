@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BASE_URL } from '../shared/sharedData'
 import { StellenService } from './stellen.service';
 
 @Injectable({
@@ -21,10 +22,16 @@ export class StellenpflegeService {
     );
   }
 
-  setChanges(id:any,changedJob:object):Observable<any>{
-
-    return this.http.patch(`http://localhost:3000/job/${id}`, changedJob);
-
+  async setChanges(id:any,changedJob:any):Promise<any>{
+    
+    try {
+      const response = await firstValueFrom(this.http.patch(`${BASE_URL}job/${id}`, changedJob));
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error('Error updating job:', error);
+      throw error;
+    }
   }
 
 }
