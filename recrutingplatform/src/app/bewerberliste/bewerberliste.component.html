@@ -1,19 +1,43 @@
 <div class="job-list">
   <span><h1>Bewerbungs-Management</h1></span>
 
-  <span>Rolle: Recruiter</span>
+  <h2>Status: Bewerbung eingegangen</h2>
+  <div *ngFor="let appl of applicationList">
+    <div class="job-card" *ngIf="appl.status == 'Bewerbung eingegangen'">
+      <div class="job-header">
+        <p class="application-text">{{ appl.applicationTitle }}</p>
+      </div>
 
-  <div
-    class="job-card"
-    *ngFor="let job of applicationList"
-    (click)="openJob(job)"
-  >
-    <div class="job-header">
-      <h2>{{ job.applicationTitle }}</h2>
+      <button class="apply-button3" (click)="download(appl._id)">
+        Dokument herunterladen
+      </button>
+      <button
+        class="apply-button"
+        (click)="statusupdate('Bewerbung akzeptiert', appl._id)"
+      >
+        Bewerbung akzeptieren
+      </button>
+      <button
+        class="apply-button2"
+        (click)="statusupdate('Bewerbung gelöscht', appl._id)"
+      >
+        Bewerbung ablehnen/löschen
+      </button>
     </div>
-    <p class="location">{{ job.location }}</p>
-    <button class="apply-button" (click)="apply(job)">
-      Bewerbung akzeptieren
-    </button>
+  </div>
+  <br />
+  <h2>Status: Bewerbung akzeptiert</h2>
+  <div *ngFor="let appl of applicationList">
+    <div class="job-card" *ngIf="appl.status == 'Bewerbung akzeptiert'">
+      <div class="job-header">
+        <p class="application-text">{{ appl.applicationTitle }}</p>
+      </div>
+      <button
+        class="apply-button2"
+        (click)="statusupdate('Bewerbung gelöscht', appl._id)"
+      >
+        Bewerbung ablehnen/löschen
+      </button>
+    </div>
   </div>
 </div>

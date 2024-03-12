@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, firstValueFrom } from 'rxjs';
+import { BASE_URL } from '../shared/sharedData';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BewerberlisteService {
-  private jobData = new BehaviorSubject<any>(null); // Initialwert für den Datenstrom
-  currentData = this.jobData.asObservable(); // Observable, auf das Komponenten subscriben können
+  private applData = new BehaviorSubject<any>(null); // Initialwert für den Datenstrom
+  currentData = this.applData.asObservable(); // Observable, auf das Komponenten subscriben können
 
   constructor(private http: HttpClient) {}
 
@@ -18,38 +19,18 @@ export class BewerberlisteService {
     return this.http.get('http://localhost:3000/application/');
   }
 
-  // Funktionen für Recruitersicht
-  addJob(
-    jobTitle: String,
-    jobDescription: String,
-    jobRequirements: String,
-    location: String,
-    benefits: String,
-    salaryRangeMin: Number,
-    salaryRangeMax: Number,
-    vacancyActive: Boolean
-  ) {
-    let job = {
-      benefits: benefits,
-      jobDescription: jobDescription,
-      jobRequirements: jobRequirements,
-      jobTitle: jobTitle,
-      location: location,
-      salaryRangeMin: salaryRangeMin,
-      salaryRangeMax: salaryRangeMax,
-      vacancyActive: vacancyActive,
-    };
-
-    console.log(job);
-    this.http.post('http://localhost:3000/job/', job).subscribe((res) => {
-      return true;
-      console.log(res);
-    });
-  }
-
-  deleteJob() {}
-
-  sendJobData(message: any) {
-    this.jobData.next(message); //Datenübergabe an den nächsten Component
+  //Status change
+  async setChanges(status: any, id: any): Promise<any> {
+    try {
+      const updateData = { status: status };
+      const response = await firstValueFrom(
+        this.http.patch(`${BASE_URL}application/${id}`, updateData)
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error('Error updating application:', error);
+      throw error;
+    }
   }
 }

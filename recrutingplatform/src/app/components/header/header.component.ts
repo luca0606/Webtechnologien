@@ -5,39 +5,38 @@ import { DataService } from 'src/app/service/data.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-
   // private showHeaderAndFooter: Subscription
-  protected showHeaderAndFooter: Subscription
+  protected showHeaderAndFooter: Subscription;
   isLoggedIn: boolean = false;
+  user: any;
+  userSubscription: Subscription = new Subscription();
 
   constructor(
     private authService: AuthService,
     private dataService: DataService,
     private router: Router,
     private cdr: ChangeDetectorRef
-  ) {
-
-
-
-  }
+  ) {}
 
   abmelden() {
-    this.authService.abmelden()
+    this.authService.abmelden();
   }
 
   ngOnInit() {
-    this.dataService.currentIsLoggedIn.subscribe(value => {
-      this.isLoggedIn = value
+    this.dataService.currentIsLoggedIn.subscribe((value) => {
+      this.isLoggedIn = value;
       // console.log("header", this.isLoggedIn)
       this.cdr.detectChanges();
-    })
+    });
+    this.userSubscription = this.dataService.user$.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ngOnDestroy() {
@@ -45,5 +44,4 @@ export class HeaderComponent {
       this.showHeaderAndFooter.unsubscribe();
     }
   }
-
 }
