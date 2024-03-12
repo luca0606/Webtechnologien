@@ -1,5 +1,4 @@
 <div class="job-list">
-
   <span *ngIf="user.recruiterRole"><h1>Stellen-Management</h1></span>
   <span *ngIf="!user.recruiterRole"><h1>Stellenportal</h1></span>
 
@@ -12,30 +11,27 @@
     *ngIf="isJobListLoaded"
   ></app-filter>
 
-  <div
-    class="job-card"
-    *ngFor="let job of jobList"
-    (click)="openJob(job)"
-  >
+  <div class="job-card" *ngFor="let job of jobList" (click)="openJob(job)">
     <div class="job-header">
       <h2>{{ job.jobTitle }}</h2>
-      <span class="job-salary">{{ job.salaryRangeMin | currency:'EUR':'symbol':'1.0-0' }} - {{ job.salaryRangeMax |
-        currency:'EUR':'symbol':'1.0-0' }}</span>
+      <span class="job-salary"
+        >{{ job.salaryRangeMin | currency : "EUR" : "symbol" : "1.0-0" }} -
+        {{ job.salaryRangeMax | currency : "EUR" : "symbol" : "1.0-0" }}</span
+      >
     </div>
     <p class="location">{{ job.location }}</p>
     <!-- Hier könnten Sie z.B. Buttons oder Links für "Mehr erfahren" oder "Bewerben" hinzufügen -->
     <button
-      *ngIf="!user.recruiterRole" 
+      *ngIf="!user.recruiterRole"
       class="apply-button"
       (click)="apply(job)"
-      
-    >Bewerben</button>
+    >
+      Bewerben
+    </button>
     <span *ngIf="user.recruiterRole">
-      <button
-        class="apply-button"
-        (click)="editJob(job)">
+      <button class="apply-button" (click)="editJob(job)">
         Stelle Pflegen
       </button>
-  </span>
+    </span>
   </div>
 </div>
