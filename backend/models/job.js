@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const jobSchema = new mongoose.Schema({
+const JobSchema = new mongoose.Schema({
     benefits: String,
     jobDescription: String,
     jobRequirements: String,
@@ -13,4 +13,4 @@ const jobSchema = new mongoose.Schema({
     { collection: "jobs" }
 )
 
-module.exports = mongoose.model("jobModel", jobSchema)
+module.exports = mongoose.model("JobModel", JobSchema)
