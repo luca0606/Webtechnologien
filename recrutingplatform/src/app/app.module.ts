@@ -8,7 +8,6 @@ import { StartseiteComponent } from './startseite/startseite.component';
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TestComponent } from './testbackend/test/test.component';
 import { StellenportalComponent } from './stellenportal/stellenportal.component';
 import { BewerberlisteComponent } from './bewerberliste/bewerberliste.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -23,7 +22,6 @@ import { StellenComponent } from './stellen/stellen.component';
     StartseiteComponent,
     AnmeldungComponent,
     RegistrierungComponent,
-    TestComponent,
     StellenportalComponent,
     BewerberlisteComponent,
     HeaderComponent,
