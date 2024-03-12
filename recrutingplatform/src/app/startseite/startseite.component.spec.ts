@@ -9,7 +9,7 @@ describe('StartseiteComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [StartseiteComponent],
-      imports: [RouterTestingModule] // Include this if your component template uses routerLink
+      imports: [RouterTestingModule]
     })
       .compileComponents();
   });

@@ -42,7 +42,7 @@ describe('HeaderComponent', () => {
 
   it('should update isLoggedIn when data service emits', () => {
     isLoggedInSubject.next(true);
-    fixture.detectChanges(); // Update view to reflect new state
+    fixture.detectChanges();
 
     expect(component.isLoggedIn).toBeTrue();
   });
@@ -54,6 +54,6 @@ describe('HeaderComponent', () => {
 
   it('should unsubscribe on ngOnDestroy', () => {
     component.ngOnDestroy();
-    expect().nothing(); // Indicates the test passes if no errors are thrown
+    expect().nothing();
   });
 });

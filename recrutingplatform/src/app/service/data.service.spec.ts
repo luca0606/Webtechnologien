@@ -7,7 +7,6 @@ describe('DataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     dataService = TestBed.inject(DataService);
-    // Clear localStorage before each test
     localStorage.clear();
   });
 
@@ -20,7 +19,7 @@ describe('DataService', () => {
     dataService.updateIsLoggedIn(true);
     dataService.getIsLoggedIn().subscribe(isLoggedIn => {
       expect(isLoggedIn).toBeTrue();
-      done(); // Indicate to Jasmine that the asynchronous test is complete
+      done();
     });
   });
 
@@ -28,7 +27,7 @@ describe('DataService', () => {
     dataService.updateIsLoggedIn(false);
     dataService.getIsLoggedIn().subscribe(isLoggedIn => {
       expect(isLoggedIn).toBeFalse();
-      done(); // Indicate to Jasmine that the asynchronous test is complete
+      done();
     });
   });
 
@@ -42,7 +41,6 @@ describe('DataService', () => {
     expect(userFromLocalStorage).not.toBeNull();
     expect(JSON.parse(userFromLocalStorage!)).toEqual(mockUser);
 
-    // Also test getting user from localStorage through the service
     const userFromService = dataService.getUserFromLocalStorage();
     expect(userFromService).toEqual(mockUser);
   });
