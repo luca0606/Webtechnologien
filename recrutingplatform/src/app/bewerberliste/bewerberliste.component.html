@@ -1,1 +1,19 @@
-<p>bewerberliste works!</p>
+<div class="job-list">
+  <span><h1>Bewerbungs-Management</h1></span>
+
+  <span>Rolle: Recruiter</span>
+
+  <div
+    class="job-card"
+    *ngFor="let job of applicationList"
+    (click)="openJob(job)"
+  >
+    <div class="job-header">
+      <h2>{{ job.applicationTitle }}</h2>
+    </div>
+    <p class="location">{{ job.location }}</p>
+    <button class="apply-button" (click)="apply(job)">
+      Bewerbung akzeptieren
+    </button>
+  </div>
+</div>

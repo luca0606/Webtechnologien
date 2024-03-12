@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { StellenpflegeComponent } from './stellenpflege/stellenpflege.component';
 import { StellenComponent } from './stellen/stellen.component';
+import { BewerbenComponent } from './bewerben/bewerben.component';
 
 @NgModule({
   declarations: [
@@ -31,16 +32,16 @@ import { StellenComponent } from './stellen/stellen.component';
     FilterComponent,
     StellenpflegeComponent,
     StellenComponent,
+    BewerbenComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [
-  ],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

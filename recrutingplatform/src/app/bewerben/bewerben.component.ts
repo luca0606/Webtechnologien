@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BewerbenService } from '../service/bewerben.service';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-bewerben',
