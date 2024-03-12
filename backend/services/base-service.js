@@ -20,7 +20,7 @@ class BaseService {
   }
 
   async update(id, object) {
-    return this.model.findByIdAndUpdate(id, object);
+    return await this.model.findByIdAndUpdate(id, object);
   }
 
   async find(id) {

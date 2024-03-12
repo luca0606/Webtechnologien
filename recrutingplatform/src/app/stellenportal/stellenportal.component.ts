@@ -33,6 +33,7 @@ export class StellenportalComponent {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+
   }
 
   buildJobList() {
@@ -65,30 +66,6 @@ export class StellenportalComponent {
     }
   }
 
-  createJob() {
-    let ijob = {
-      benefits: 'Teamevents',
-      jobTitle: 'Ausbildung zum Fachinformatiker',
-      jobDescription: '1st und 2nd Level Support',
-      jobRequirements: 'Mittlere Hochschulereife',
-      location: 'Berlin',
-      salaryRangeMin: 20000,
-      salaryRangeMax: 22000,
-      vacancyActive: false,
-    };
-
-    this.stellenService.addJob(
-      ijob.jobTitle,
-      ijob.jobDescription,
-      ijob.jobRequirements,
-      ijob.location,
-      ijob.benefits,
-      ijob.salaryRangeMin,
-      ijob.salaryRangeMax,
-      ijob.vacancyActive
-    );
-  }
-
   onJobListFiltered(filteredJobList: any[]) {
     this.jobList = filteredJobList;
   }
@@ -102,7 +79,12 @@ export class StellenportalComponent {
     //alert(job._id);
     this.r.navigate(['/bewerben'], { state: { id: job._id } });
   }
-  editJob(job: any) {
-    this.r.navigate(['/stellenpflege'], { state: { id: job._id } });
+  editJob(job:any){
+    this.r.navigate(['/stellenpflege'], { state: { id: job._id,
+                                                  mode: 'edit' } });
+  }
+
+  onPressAdd(){
+    this.r.navigate(['/stellenpflege'], { state: { mode: 'add' } });
   }
 }
