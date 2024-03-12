@@ -6,7 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { StartseiteComponent } from './startseite/startseite.component';
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { RegistrierungComponent } from './registrierung/registrierung.component';
-import { TestComponent } from './testbackend/test/test.component';
 import { StellenportalComponent } from './stellenportal/stellenportal.component';
 import { BewerbenComponent } from './bewerben/bewerben.component';
 import { BewerberlisteComponent } from './bewerberliste/bewerberliste.component';
@@ -26,11 +25,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'stellenportal', component: StellenportalComponent },
-      { path: 'test', component: TestComponent, canActivate: [AuthGuard] },
-      //{ path: 'bewerberliste', component: BewerberlisteComponent },
+      { path: 'bewerberliste', component: BewerberlisteComponent },
       { path: 'stellenanzeige', component: StellenComponent },
-      { path: 'bewerben', component: BewerbenComponent },
       { path: 'stellenpflege', component: StellenpflegeComponent },
+      { path: 'bewerben', component: BewerbenComponent },
     ],
   },
 ];

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { BASE_URL } from '../shared/sharedData'
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class StellenService {
 
   getJobList(): Observable<any> {
     // Dies gibt ein Observable zurück, das von der aufrufenden Stelle abonniert werden kann
-    return this.http.get("http://localhost:3000/job/");
+    return this.http.get(`${BASE_URL}job`);
   }
 
 
@@ -37,7 +38,7 @@ export class StellenService {
 
 
   console.log(job);
-  this.http.post("http://localhost:3000/job/", job)
+  this.http.post(`${BASE_URL}job/`, job)
       .subscribe((res) => {
         return true;
         console.log(res);
@@ -45,13 +46,7 @@ export class StellenService {
 
   }
 
-  deleteJob(){
-  }
-
   sendJobData(message:any){
     this.jobData.next(message) //Datenübergabe an den nächsten Component
   }
-
-  
-
 }

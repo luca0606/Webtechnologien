@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 
-import { AuthService } from 'src/app/service/auth-service';
+import { AuthService } from 'src/app/service/auth.service';
 import { DataService } from 'src/app/service/data.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';

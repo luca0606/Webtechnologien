@@ -8,7 +8,6 @@ const corsOptions = {
     // origin: "*"
 
     origin: function (origin, callback) {
-        console.log("huuuu backend")
         if (!origin || whitelist.indexOf(origin) !== -1) {
             callback(null, true)
         } else {
