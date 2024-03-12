@@ -14,24 +14,21 @@ export class BewerberlisteComponent {
 
   subscription: Subscription = new Subscription();
 
-  constructor(
-    private stellenService: BewerberlisteService,
-    private r: Router
-  ) {}
+  constructor(private applService: BewerberlisteService, private r: Router) {}
 
   ngOnInit() {
     // get user from data service
 
-    this.buildJobList();
+    this.buildApplList();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  buildJobList() {
+  buildApplList() {
     //Hole nur aktive Stellenanzeigen für Bewerbersicht
-    this.stellenService.getJobList().subscribe(
+    this.applService.getJobList().subscribe(
       async (res) => {
         this.applicationList = await res;
       },
@@ -41,16 +38,12 @@ export class BewerberlisteComponent {
     );
   }
 
-  openJob(job: any) {
-    this.stellenService.sendJobData(job); //Alle damit Stellenliste
-    this.r.navigate(['/stellenanzeige']);
+  async statusupdate(status: string, id: string) {
+    await this.applService.setChanges(status, id);
+    this.buildApplList(); // Liste neu aufbauen, um die aktualisierten Daten anzuzeigen
   }
 
-  apply(job: any) {
-    alert(job._id);
-    //this.r.navigate(['/'], { state: { id: job._id } });
-  }
-  editJob(job: any) {
-    this.r.navigate(['/stellenpflege'], { state: { id: job._id } });
+  download(id: string) {
+    //Hier folgt download Methode
   }
 }

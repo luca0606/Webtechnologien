@@ -1,11 +1,13 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const applicationSchema = new mongoose.Schema({
+const applicationSchema = new mongoose.Schema(
+  {
     applicationTitle: String,
     jobId: String,
     filePath: String,
-},
-    { collection: "application" }
-)
+    status: String,
+  },
+  { collection: "application" }
+);
 
-module.exports = mongoose.model("applicationModel", applicationSchema)
+module.exports = mongoose.model("applicationModel", applicationSchema);

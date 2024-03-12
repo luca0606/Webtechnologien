@@ -1,10 +1,15 @@
 <header class="fixed-header">
-    <nav>
-        <ul>
-            <li><a routerLink="/">Start</a></li>
-            <li *ngIf="!isLoggedIn"><a routerLink="/anmeldung">Anmeldung</a></li>
-            <li *ngIf="isLoggedIn"><a routerLink="/stellenportal">Stellenportal</a></li>
-            <button *ngIf="isLoggedIn" (click)="abmelden()">Abmelden</button>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a routerLink="/">Start</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/anmeldung">Anmeldung</a></li>
+      <li *ngIf="isLoggedIn">
+        <a routerLink="/stellenportal">Stellenportal</a>
+      </li>
+      <li *ngIf="user.recruiterRole">
+        <a routerLink="/bewerberliste">Bewerbungen</a>
+      </li>
+      <button *ngIf="isLoggedIn" (click)="abmelden()">Abmelden</button>
+    </ul>
+  </nav>
 </header>
