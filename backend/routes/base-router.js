@@ -40,7 +40,9 @@ class BaseRouter {
         })
 
         this.router.patch('/:id', async (req, res) => {
-            const object = Object.assign({}, this.model, req.body)
+            // This usage creates circular objects and causes an error
+            // const object = Object.assign({}, this.model, req.body)
+            const updateObject = { ...req.body }
             const id = req.params.id
             try {
                 await this.validator.validate(req.body)
@@ -50,7 +52,7 @@ class BaseRouter {
             }
 
             try {
-                const result = await service.update(id, object)
+                const result = await service.update(id, updateObject)
                 res.status(200).send(result)
             } catch (error) {
                 return res.status(500).send(error)
