@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RegistrierungService } from './registrierung.service';
 import * as CryptoJS from 'crypto-js';
+import { BASE_URL } from '../shared/sharedData';
 
 describe('RegistrierungService', () => {
   let service: RegistrierungService;
@@ -37,7 +38,7 @@ describe('RegistrierungService', () => {
 
     service.addUser(mockUser.firstname, mockUser.lastname, mockUser.email, mockUser.recruiterRole);
 
-    const req = httpTestingController.expectOne('http://localhost:3000/user/register');
+    const req = httpTestingController.expectOne(`${BASE_URL}user/register`);
     expect(req.request.method).toEqual('POST');
     expect(req.request.body).toEqual(mockUser);
     req.flush({ message: 'User added' });
@@ -50,7 +51,7 @@ describe('RegistrierungService', () => {
 
     service.addUserAuthData(email, password);
 
-    const req = httpTestingController.expectOne('http://localhost:3000/auth/');
+    const req = httpTestingController.expectOne(`${BASE_URL}auth/`);
     expect(req.request.method).toEqual('POST');
     expect(req.request.body).toEqual({ email: email, password: hashedPassword });
     req.flush({ message: 'AuthData added' });

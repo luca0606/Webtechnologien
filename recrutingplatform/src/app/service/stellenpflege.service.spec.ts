@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { StellenpflegeService } from './stellenpflege.service';
 import { StellenService } from './stellen.service';
 import { of } from 'rxjs';
+import { BASE_URL } from '../shared/sharedData';
 
 describe('StellenpflegeService', () => {
   let service: StellenpflegeService;
@@ -48,9 +49,9 @@ describe('StellenpflegeService', () => {
     const changedJob = { title: 'Updated Developer' };
     const id = '1';
 
-    service.setChanges(id, changedJob).subscribe();
+    service.setChanges(id, changedJob)
 
-    const req = httpTestingController.expectOne(`http://localhost:3000/job/${id}`);
+    const req = httpTestingController.expectOne(`${BASE_URL}job/${id}`);
     expect(req.request.method).toEqual('PATCH');
     expect(req.request.body).toEqual(changedJob);
     req.flush(changedJob); // Simulate the HTTP response

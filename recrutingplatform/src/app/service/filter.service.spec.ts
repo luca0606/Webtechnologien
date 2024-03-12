@@ -17,7 +17,6 @@ describe('FilterService', () => {
   });
 
   afterEach(() => {
-    // After every test, assert that there are no more pending requests.
     httpTestingController.verify();
   });
 
@@ -41,7 +40,6 @@ describe('FilterService', () => {
     const newFilter = { name: 'New Filter' };
     const addedFilter = { ...newFilter, id: 1 };
 
-    // No need for done function since we're using async/await
     service.addFilter(newFilter).then(response => {
       expect(response).toEqual(addedFilter);
     });
@@ -49,13 +47,12 @@ describe('FilterService', () => {
     const req = httpTestingController.expectOne(`${BASE_URL}filter/`);
     expect(req.request.method).toEqual('POST');
     expect(req.request.body).toEqual(newFilter);
-    req.flush(addedFilter); // Simulate the HTTP response
+    req.flush(addedFilter);
   });
 
   it('updateFilter should make PATCH request to update a filter', async () => {
     const updatedFilter = { _id: '1', name: 'Updated Filter' };
 
-    // No need for done function since we're using async/await
     service.updateFilter(updatedFilter).then(response => {
       expect(response).toEqual(updatedFilter);
     });
@@ -63,7 +60,7 @@ describe('FilterService', () => {
     const req = httpTestingController.expectOne(`${BASE_URL}filter/${updatedFilter._id}`);
     expect(req.request.method).toEqual('PATCH');
     expect(req.request.body).toEqual(updatedFilter);
-    req.flush(updatedFilter); // Simulate the HTTP response
+    req.flush(updatedFilter);
   });
 
 
