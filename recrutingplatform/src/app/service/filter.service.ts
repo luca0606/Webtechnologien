@@ -50,6 +50,8 @@ export class FilterService {
    */
   async updateFilter(filter: any): Promise<any> {
     try {
+      console.log('Serviceaufruf Filter:');
+      console.log(filter);
       const response = await firstValueFrom(this.http.patch(`${BASE_URL}filter/${filter._id}`, filter));
       console.log(response);
       return response;

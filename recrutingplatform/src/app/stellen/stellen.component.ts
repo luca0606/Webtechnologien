@@ -65,6 +65,7 @@ export class StellenComponent {
   }
   editJob() {
     //Klick auf Stelle pflegen
-    this.r.navigate(['/stellenpflege'], { state: { id: this.message._id } });
+    this.r.navigate(['/stellenpflege'], { state: { id: this.message._id,
+                                                   mode: 'edit' } });
   }
 }
