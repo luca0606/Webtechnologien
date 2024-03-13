@@ -13,24 +13,37 @@ export class BewerbenComponent {
   applicationSuccessful: boolean = false;
   bewerbenForm: FormGroup;
 
+  selectedFile: File= null;
+
+  id:any;
+
   constructor(
     private fb: FormBuilder,
     private rg: BewerbenService,
     private router: Router
   ) {
     const navigation = this.router.getCurrentNavigation();
-    const id = navigation?.extras.state['id'];
-    console.log(id);
+    this.id = navigation?.extras.state['id'];
+    console.log(this.id);
   }
 
   ngOnInit() {
+  
     this.bewerbenForm = this.fb.group({
-      bewerbung: ['', Validators.required],
-      datei: ['', Validators.required],
+      applicationTitle: [''],
+      filePath:[''] ,
+      status: ['Bewerbung eingegangen'],
     });
   }
 
   onFileSelected(event: any) {
+    
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      this.bewerbenForm.get('filePath').setValue(this.selectedFile);;
+    }
+
     this.isUploaded = true;
     const dokumentButton = document.querySelector('.dokument-button');
     if (dokumentButton) {
@@ -39,14 +52,22 @@ export class BewerbenComponent {
   }
   onSubmit() {
     if (this.bewerbenForm.valid) {
-      this.rg.addApplication(
-        this.bewerbenForm.value.bewerbung,
-        this.bewerbenForm.value.datei
-      );
-      console.log('Formular abgeschickt');
+      //Datei namen in filePath schreiben
+      this.bewerbenForm.value.filePath = this.selectedFile.name; 
+      this.rg.addApplication(this.bewerbenForm.value);
+      this.onUpload();
       this.applicationSuccessful = true;
     } else {
       alert('Eingabedaten sind fehlerhaft.');
     }
+  }
+
+  async onUpload(){
+    
+    const formData = new FormData();
+    console.log(this.selectedFile.name);
+    formData.append('file', this.selectedFile, this.selectedFile.name)
+    await this.rg.uploadApplication(formData);
+
   }
 }

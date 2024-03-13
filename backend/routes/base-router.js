@@ -36,7 +36,7 @@ class BaseRouter {
         return e;
       }
     });
-
+   
     this.router.patch("/:id", async (req, res) => {
       // This usage creates circular objects and causes an error
       // const object = Object.assign({}, this.model, req.body)
