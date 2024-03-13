@@ -49,7 +49,7 @@ describe('StellenpflegeService', () => {
     const changedJob = { title: 'Updated Developer' };
     const id = '1';
 
-    service.setChanges(id, changedJob)
+    service.saveChanges(id, changedJob)
 
     const req = httpTestingController.expectOne(`${BASE_URL}job/${id}`);
     expect(req.request.method).toEqual('PATCH');

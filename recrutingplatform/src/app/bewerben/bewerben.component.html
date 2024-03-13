@@ -1,49 +1,38 @@
-<header class="fixed-header">
-  <nav>
-    <ul>
-      <li><a routerLink="/">Start</a></li>
-      <li><a routerLink="/stellenportal">Stellenportal</a></li>
-    </ul>
-  </nav>
-</header>
-
 <section>
   <br />
   <h2>Job-Bezeichnung</h2>
   <p>Hier steht nochmal eine kurze Stellenbeschreibung</p>
   <form
     [formGroup]="bewerbenForm"
-    (ngSubmit)="onSubmit()"
     enctype="multipart/form-data"
   >
     <div>
-      <label for="bewerbungstext"><h4>Bewerbung:</h4></label>
+      <label for="applicationTitle"><h4>Bewerbung:</h4></label>
       <textarea
         id="bewerbungstext"
         name="bewerbungstext"
         rows="8"
         cols="50"
         required
+        formControlName="applicationTitle"
       ></textarea>
     </div>
     <div>
-      <label for="dokument"><h4>Dokument hochladen:</h4></label>
+      <label for="filePath"><h4>Dokument hochladen:</h4></label>
       <input
         type="file"
         id="dokument"
         name="dokument"
         (change)="onFileSelected($event)"
-        accept=".pdf, .doc, .docx"
+        accept=".pdf, .doc, .docx, .txt"
         required
         class="dokument-button"
+        formControlName="filePath"
       />
     </div>
     <div *ngIf="isUploaded" class="uploaded-message">Datei hochgeladen</div>
     <br />
-    <button type="submit" class="bewerben-button">Bewerbung abschicken</button>
+    <button type="button" class="bewerben-button" (click)="onSubmit()">Bewerbung abschicken</button>
   </form>
 </section>
 
-<footer>
-  <p>&copy; 2024 Unternehmensname. Alle Rechte vorbehalten.</p>
-</footer>
