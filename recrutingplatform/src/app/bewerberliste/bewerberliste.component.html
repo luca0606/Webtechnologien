@@ -15,7 +15,7 @@
         class="apply-button"
         (click)="statusupdate('Bewerbung akzeptiert', appl._id)"
       >
-        Bewerbung akzeptieren
+        Bewerbung annehmen
       </button>
       <button
         class="apply-button2"
@@ -26,7 +26,7 @@
     </div>
   </div>
   <br />
-  <h2>Status: Bewerbung akzeptiert</h2>
+  <h2>Status: Bewerbung in Arbeit</h2>
   <div *ngFor="let appl of applicationList">
     <div class="job-card" *ngIf="appl.status == 'Bewerbung akzeptiert'">
       <div class="job-header">
@@ -90,10 +90,7 @@
         Mitteilung senden
       </button>
 
-      <button
-        class="apply-button2"
-        (click)="statusupdate('Bewerbung gelöscht', appl._id)"
-      >
+      <button class="apply-button2" (click)="appldelete(appl._id)">
         Bewerbung löschen
       </button>
     </div>

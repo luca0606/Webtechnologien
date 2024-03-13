@@ -28,7 +28,7 @@ export class BewerberlisteComponent {
 
   buildApplList() {
     //Hole nur aktive Stellenanzeigen für Bewerbersicht
-    this.applService.getJobList().subscribe(
+    this.applService.getApplList().subscribe(
       async (res) => {
         this.applicationList = await res;
       },
@@ -45,6 +45,11 @@ export class BewerberlisteComponent {
 
   async messageupdate(status: string, id: string) {
     await this.applService.setMessage(status, id);
+    this.buildApplList(); // Liste neu aufbauen, um die aktualisierten Daten anzuzeigen
+  }
+
+  async appldelete(id: string) {
+    await this.applService.deleteAppl(id);
     this.buildApplList(); // Liste neu aufbauen, um die aktualisierten Daten anzuzeigen
   }
 
