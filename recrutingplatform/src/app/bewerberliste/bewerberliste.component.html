@@ -19,9 +19,9 @@
       </button>
       <button
         class="apply-button2"
-        (click)="statusupdate('Bewerbung gelöscht', appl._id)"
+        (click)="statusupdate('Bewerbung abgelehnt', appl._id)"
       >
-        Bewerbung ablehnen/löschen
+        Bewerbung ablehnen
       </button>
     </div>
   </div>
@@ -32,11 +32,69 @@
       <div class="job-header">
         <p class="application-text">{{ appl.applicationTitle }}</p>
       </div>
+      <!-- Dropdown-Menü -->
+      <select [(ngModel)]="appl.selectedOption">
+        <option value="Email an Bewerber senden">
+          Email an Bewerber senden
+        </option>
+        <option value="Zum Bewerbungsgespräch einladen">
+          Zum Bewerbungsgespräch einladen
+        </option>
+        <option value="Telefonisch beim Bewerber melden">
+          Telefonisch beim Bewerber melden
+        </option>
+      </select>
+      <button
+        class="apply-button"
+        (click)="messageupdate(appl.selectedOption, appl._id)"
+      >
+        Mitteilung senden
+      </button>
+
+      <button
+        class="apply-button2"
+        (click)="statusupdate('Bewerbung abgelehnt', appl._id)"
+      >
+        Bewerbung ablehnen
+      </button>
+      <br />
+      <p class="application-text" *ngIf="appl.message !== ''">
+        Aktuelle Maßnahme: {{ appl.message }}
+      </p>
+    </div>
+  </div>
+  <br />
+  <h2>Status: Bewerbung abgelehnt</h2>
+  <div *ngFor="let appl of applicationList">
+    <div class="job-card" *ngIf="appl.status == 'Bewerbung abgelehnt'">
+      <div class="job-header">
+        <p class="application-text">{{ appl.applicationTitle }}</p>
+      </div>
+
+      <!-- Dropdown-Menü -->
+      <select [(ngModel)]="appl.selectedOption">
+        <option value="Email an Bewerber senden">
+          Email an Bewerber senden
+        </option>
+        <option value="Zum Bewerbungsgespräch einladen">
+          Zum Bewerbungsgespräch einladen
+        </option>
+        <option value="Telefonisch beim Bewerber melden">
+          Telefonisch beim Bewerber melden
+        </option>
+      </select>
+      <button
+        class="apply-button"
+        (click)="messageupdate(appl.selectedOption, appl._id)"
+      >
+        Mitteilung senden
+      </button>
+
       <button
         class="apply-button2"
         (click)="statusupdate('Bewerbung gelöscht', appl._id)"
       >
-        Bewerbung ablehnen/löschen
+        Bewerbung löschen
       </button>
     </div>
   </div>

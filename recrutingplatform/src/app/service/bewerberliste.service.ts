@@ -33,4 +33,19 @@ export class BewerberlisteService {
       throw error;
     }
   }
+
+  //Status change
+  async setMessage(message: any, id: any): Promise<any> {
+    try {
+      const updateData = { message: message };
+      const response = await firstValueFrom(
+        this.http.patch(`${BASE_URL}application/${id}`, updateData)
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error('Error updating application:', error);
+      throw error;
+    }
+  }
 }

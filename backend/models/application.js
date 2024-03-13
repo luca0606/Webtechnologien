@@ -6,6 +6,7 @@ const applicationSchema = new mongoose.Schema(
     jobId: String,
     filePath: String,
     status: String,
+    message: String,
   },
   { collection: "application" }
 );

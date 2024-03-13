@@ -43,6 +43,11 @@ export class BewerberlisteComponent {
     this.buildApplList(); // Liste neu aufbauen, um die aktualisierten Daten anzuzeigen
   }
 
+  async messageupdate(status: string, id: string) {
+    await this.applService.setMessage(status, id);
+    this.buildApplList(); // Liste neu aufbauen, um die aktualisierten Daten anzuzeigen
+  }
+
   download(id: string) {
     //Hier folgt download Methode
   }
