@@ -22,9 +22,9 @@ export class BewerbenComponent {
     private rg: BewerbenService,
     private router: Router
   ) {
-    const navigation = this.router.getCurrentNavigation();
-    this.id = navigation?.extras.state['id'];
-    console.log(this.id);
+    //const navigation = this.router.getCurrentNavigation();
+    //this.id = navigation?.extras.state['id'];
+    //console.log(this.id);
   }
 
   ngOnInit() {
@@ -52,9 +52,11 @@ export class BewerbenComponent {
   }
   onSubmit() {
     if (this.bewerbenForm.valid) {
-      //Datei namen in filePath schreiben
+      //Dateinamen in filePath schreiben für QueryString
       this.bewerbenForm.value.filePath = this.selectedFile.name; 
+      //Applikation in der Datenbank speichern
       this.rg.addApplication(this.bewerbenForm.value);
+      //Uploaden
       this.onUpload();
       this.applicationSuccessful = true;
     } else {
@@ -65,8 +67,7 @@ export class BewerbenComponent {
   async onUpload(){
     
     const formData = new FormData();
-    console.log(this.selectedFile.name);
-    formData.append('file', this.selectedFile, this.selectedFile.name)
+    formData.append('file', this.selectedFile, this.selectedFile.name);
     await this.rg.uploadApplication(formData);
 
   }

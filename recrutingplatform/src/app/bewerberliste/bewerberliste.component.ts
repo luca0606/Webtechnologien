@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class BewerberlisteComponent {
   applicationList: any[];
-
+  fileName:string;
   subscription: Subscription = new Subscription();
 
   constructor(private applService: BewerberlisteService, private r: Router) {}
@@ -53,7 +53,7 @@ export class BewerberlisteComponent {
     this.buildApplList(); // Liste neu aufbauen, um die aktualisierten Daten anzuzeigen
   }
 
-  download(id: string) {
-    //Hier folgt download Methode
+  async download(fileName:string) {
+  await this.applService.downloadAppl(fileName);
   }
 }
