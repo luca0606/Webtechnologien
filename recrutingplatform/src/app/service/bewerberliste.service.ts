@@ -14,7 +14,7 @@ export class BewerberlisteService {
 
   //Funktionen für Bewerbersicht
 
-  getJobList(): Observable<any> {
+  getApplList(): Observable<any> {
     // Dies gibt ein Observable zurück, das von der aufrufenden Stelle abonniert werden kann
     return this.http.get('http://localhost:3000/application/');
   }
@@ -34,12 +34,26 @@ export class BewerberlisteService {
     }
   }
 
-  //Status change
+  //Send Message
   async setMessage(message: any, id: any): Promise<any> {
     try {
       const updateData = { message: message };
       const response = await firstValueFrom(
         this.http.patch(`${BASE_URL}application/${id}`, updateData)
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error('Error updating application:', error);
+      throw error;
+    }
+  }
+
+  //Delete Application
+  async deleteAppl(id: any): Promise<any> {
+    try {
+      const response = await firstValueFrom(
+        this.http.delete(`${BASE_URL}application/${id}`)
       );
       console.log(response);
       return response;
