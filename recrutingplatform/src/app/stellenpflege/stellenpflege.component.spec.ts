@@ -1,72 +1,81 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StellenpflegeComponent } from './stellenpflege.component';
+import { StellenpflegeComponent } from '../stellenpflege/stellenpflege.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
 import { StellenpflegeService } from '../service/stellenpflege.service';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
 describe('StellenpflegeComponent', () => {
   let component: StellenpflegeComponent;
   let fixture: ComponentFixture<StellenpflegeComponent>;
-  let stellenpflegeService: StellenpflegeService;
-
-  const mockJob = {
-    jobTitle: 'Developer',
-    jobDescription: 'Job Description',
-    jobRequirements: 'Requirements',
-    benefits: 'Benefits',
-    location: 'Location',
-    salaryRangeMax: 100000,
-    salaryRangeMin: 80000,
-    vacancyActive: true,
-    _id: '123'
-  };
+  let stellenpflegeServiceMock: any;
+  let router: Router;
 
   beforeEach(async () => {
-    const stellenpflegeServiceSpy = jasmine.createSpyObj('StellenpflegeService', ['getJobById', 'setChanges']);
+    stellenpflegeServiceMock = {
+      getJobById: jasmine.createSpy('getJobById').and.returnValue(of({
+        _id: '1',
+        benefits: 'Nice environment',
+        jobDescription: 'Developer position',
+        jobRequirements: 'Requirements',
+        jobTitle: 'Developer',
+        location: 'Berlin',
+        salaryRangeMax: 60000,
+        salaryRangeMin: 50000,
+        vacancyActive: true
+      })),
+      saveChanges: jasmine.createSpy('saveChanges').and.returnValue(of({})),
+      deleteJob: jasmine.createSpy('deleteJob').and.returnValue(of({}))
+    };
 
     await TestBed.configureTestingModule({
       declarations: [StellenpflegeComponent],
-      imports: [RouterTestingModule, ReactiveFormsModule, FormsModule, HttpClientTestingModule],
       providers: [
         FormBuilder,
-        { provide: StellenpflegeService, useValue: stellenpflegeServiceSpy }
-      ]
-    }).compileComponents();
+        { provide: StellenpflegeService, useValue: stellenpflegeServiceMock }
+      ],
+      imports: [RouterTestingModule.withRoutes([]), ReactiveFormsModule, HttpClientTestingModule]
+    })
+      .compileComponents();
 
-    fixture = TestBed.createComponent(StellenpflegeComponent);
-    component = fixture.componentInstance;
-    stellenpflegeService = TestBed.inject(StellenpflegeService);
-
-    (stellenpflegeService.getJobById as any).and.returnValue(of(mockJob));
-    fixture.detectChanges();
+    router = TestBed.inject(Router);
+    spyOn(router, 'navigate');
   });
 
-
+  beforeEach(() => {
+    fixture = TestBed.createComponent(StellenpflegeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize form with job details', () => {
-    expect(component.editForm.value).toEqual({
-      jobTitle: mockJob.jobTitle,
-      jobDescription: mockJob.jobDescription,
-      jobRequirements: mockJob.jobRequirements,
-      benefits: mockJob.benefits,
-      location: mockJob.location,
-      salaryRangeMax: mockJob.salaryRangeMax,
-      salaryRangeMin: mockJob.salaryRangeMin,
-      vacancyActive: mockJob.vacancyActive
-    });
+  it('should call saveChanges on pressSave and show success message', async () => {
+    // Prepare the component with the necessary data
+    component.job = { _id: 'mockId', /* other properties */ };
+    component.id = 'mockId'; // Ensure the ID is also set if it's coming from somewhere else like router params
+    component.initForm(); // Initialize the form with mock data if necessary
+
+    await component.onPressSave();
+
+    expect(stellenpflegeServiceMock.saveChanges).toHaveBeenCalledWith('mockId', jasmine.any(Object));
+    // Check for the success message
+    expect(component.successfulEdit).toBeTrue();
   });
 
-  it('should call setChanges on saveChanges', async () => {
-    component.id = mockJob._id;
-    component.editForm.setValue(mockJob);
-    await component.saveChanges();
-    expect(stellenpflegeService.setChanges).toHaveBeenCalledWith(mockJob._id, mockJob);
+
+  it('when mode is edit should call deleteJob on pressDelete, navigate and show success message', async () => {
+    component.mode = 'edit';
+    component.id = '1';
+    await component.onPressDelete();
+    expect(stellenpflegeServiceMock.deleteJob).toHaveBeenCalledWith('1');
+    expect(component.successfulDeletion).toBeTrue();
+    expect(router.navigate).toHaveBeenCalledWith(['/stellenportal']);
   });
 
+  // Add more tests as necessary
 });

@@ -1,74 +1,73 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StellenComponent } from './stellen.component';
-import { StellenService } from '../service/stellen.service';
-import { DataService } from '../service/data.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { DataService } from '../service/data.service';
+import { StellenService } from '../service/stellen.service';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 describe('StellenComponent', () => {
   let component: StellenComponent;
   let fixture: ComponentFixture<StellenComponent>;
-  let stellenService: StellenService;
-  let dataService: DataService;
-  const mockMessage = {
-    jobTitle: 'Developer',
-    jobDescription: 'Job Description',
-    jobRequirements: 'Requirements',
-    benefits: 'Benefits',
-    location: 'Location',
-    salaryRangeMin: 50000,
-    salaryRangeMax: 70000,
-    _id: '123'
-  };
+  let dataServiceMock: any;
+  let stellenServiceMock: any;
+  let router: Router;
 
   beforeEach(async () => {
-    const stellenServiceSpy = jasmine.createSpyObj('StellenService', ['currentData']);
-    const dataServiceSpy = jasmine.createSpyObj('DataService', ['user$']);
+    dataServiceMock = { user$: of({ recruiterRole: false }) };
+    stellenServiceMock = { currentData: of({ id: '123', jobTitle: 'Developer' }) };
 
     await TestBed.configureTestingModule({
       declarations: [StellenComponent],
-      imports: [RouterTestingModule],
       providers: [
-        { provide: StellenService, useValue: stellenServiceSpy },
-        { provide: DataService, useValue: dataServiceSpy }
-      ]
+        { provide: DataService, useValue: dataServiceMock },
+        { provide: StellenService, useValue: stellenServiceMock }
+      ],
+      imports: [RouterTestingModule.withRoutes([])]
     })
       .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(StellenComponent);
     component = fixture.componentInstance;
-    stellenService = TestBed.inject(StellenService);
-    dataService = TestBed.inject(DataService);
-
-    stellenService.currentData = of(mockMessage);
-    dataService.user$ = of({ recruiterRole: false });
-
-    spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(mockMessage));
-    spyOn(localStorage, 'setItem');
-
-    fixture.detectChanges();
+    router = TestBed.get(Router);
   });
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with job details from localStorage', () => {
-    expect(component.message).toEqual(mockMessage);
+  describe('ngOnInit', () => {
+    it('should load saved job from localStorage if available', () => {
+      const mockJob = { id: '123', jobTitle: 'Developer' };
+      spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(mockJob));
+      component.ngOnInit();
+      expect(component.message).toEqual(mockJob);
+    });
+
+    it('should subscribe to currentData if no saved job in localStorage', () => {
+      spyOn(localStorage, 'getItem').and.returnValue(null);
+      component.ngOnInit();
+      expect(component.message).toEqual({ id: '123', jobTitle: 'Developer' });
+    });
   });
 
-  it('should navigate to apply page when apply is clicked', () => {
-    const navigateSpy = spyOn((component as any).r, 'navigate');
-    component.apply();
-    expect(navigateSpy).toHaveBeenCalledWith(['/'], { state: { id: mockMessage._id } });
-  });
+  describe('navigation', () => {
+    beforeEach(() => {
+      spyOn(router, 'navigate');
+      component.message = { _id: '123', jobTitle: 'Developer' };
+    });
 
-  it('should navigate to edit page when editJob is clicked', () => {
-    const navigateSpy = spyOn((component as any).r, 'navigate');
-    component.editJob();
-    expect(navigateSpy).toHaveBeenCalledWith(['/stellenpflege'], { state: { id: mockMessage._id } });
-  });
+    it('should navigate to /bewerben on apply', () => {
+      component.apply();
 
+      expect(router.navigate).toHaveBeenCalledWith(['/bewerben'], { state: { id: '123' } });
+    });
+
+    it('should navigate to /stellenpflege on editJob', () => {
+      component.editJob();
+
+      expect(router.navigate).toHaveBeenCalledWith(['/stellenpflege'], { state: { id: '123', mode: 'edit' } });
+    });
+  });
 });

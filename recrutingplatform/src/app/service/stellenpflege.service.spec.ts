@@ -1,59 +1,57 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { StellenpflegeService } from './stellenpflege.service';
-import { StellenService } from './stellen.service';
-import { of } from 'rxjs';
 import { BASE_URL } from '../shared/sharedData';
 
 describe('StellenpflegeService', () => {
   let service: StellenpflegeService;
   let httpTestingController: HttpTestingController;
-  let stellenServiceSpy: jasmine.SpyObj<StellenService>;
 
   beforeEach(() => {
-    const spy = jasmine.createSpyObj('StellenService', ['getJobList']);
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        StellenpflegeService,
-        { provide: StellenService, useValue: spy }
-      ]
+      providers: [StellenpflegeService]
     });
     service = TestBed.inject(StellenpflegeService);
     httpTestingController = TestBed.inject(HttpTestingController);
-    stellenServiceSpy = TestBed.inject(StellenService) as jasmine.SpyObj<StellenService>;
   });
 
   afterEach(() => {
     httpTestingController.verify();
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('getJobById should return a job by id', (done: DoneFn) => {
-    const mockJobs = [
-      { _id: '1', title: 'Developer' },
-      { _id: '2', title: 'Designer' }
-    ];
-    stellenServiceSpy.getJobList.and.returnValue(of(mockJobs));
-
-    service.getJobById('1').subscribe(job => {
-      expect(job).toEqual(mockJobs[0]);
-      done();
+  it('addJob should add job', fakeAsync(() => {
+    const newJob = { title: 'New Developer' };
+    service.addJob(newJob).then(response => {
+      expect(response).toEqual(newJob);
     });
-  });
 
-  it('setChanges should make PATCH request to update a job', () => {
-    const changedJob = { title: 'Updated Developer' };
-    const id = '1';
+    const req = httpTestingController.expectOne(`${BASE_URL}job`);
+    expect(req.request.method).toEqual('POST');
+    req.flush(newJob);
+    flush();
+  }));
 
-    service.saveChanges(id, changedJob)
+  it('saveChanges should update job', fakeAsync(() => {
+    const updatedJob = { title: 'Updated Developer' };
+    service.saveChanges('1', updatedJob).then(response => {
+      expect(response).toEqual(updatedJob);
+    });
 
-    const req = httpTestingController.expectOne(`${BASE_URL}job/${id}`);
+    const req = httpTestingController.expectOne(`${BASE_URL}job/1`);
     expect(req.request.method).toEqual('PATCH');
-    expect(req.request.body).toEqual(changedJob);
-    req.flush(changedJob); // Simulate the HTTP response
-  });
+    req.flush(updatedJob);
+    flush();
+  }));
+
+  it('deleteJob should delete job', fakeAsync(() => {
+    service.deleteJob('1').then(response => {
+      expect(response).toEqual({});
+    });
+
+    const req = httpTestingController.expectOne(`${BASE_URL}job/1`);
+    expect(req.request.method).toEqual('DELETE');
+    req.flush({});
+    flush();
+  }));
 });

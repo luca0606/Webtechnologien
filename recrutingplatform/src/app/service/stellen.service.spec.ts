@@ -5,7 +5,7 @@ import { BASE_URL } from '../shared/sharedData';
 
 describe('StellenService', () => {
   let service: StellenService;
-  let httpTestingController: HttpTestingController;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -13,55 +13,41 @@ describe('StellenService', () => {
       providers: [StellenService]
     });
     service = TestBed.inject(StellenService);
-    httpTestingController = TestBed.inject(HttpTestingController);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    httpTestingController.verify();
+    httpMock.verify();
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getJobList should make GET request to retrieve job list', () => {
-    const mockJobs = [{ id: 1, title: 'Test Job' }];
+  it('getJobList should return expected jobs (HttpClient called once)', () => {
+    const expectedJobs = [
+      { id: 1, title: 'Developer' },
+      { id: 2, title: 'Designer' }
+    ];
 
     service.getJobList().subscribe(jobs => {
-      expect(jobs).toEqual(mockJobs);
+      expect(jobs.length).toBe(2);
+      expect(jobs).toEqual(expectedJobs);
     });
 
-    const req = httpTestingController.expectOne(`${BASE_URL}job/`);
-    expect(req.request.method).toEqual('GET');
-    req.flush(mockJobs);
+    const req = httpMock.expectOne(`${BASE_URL}job`);
+    expect(req.request.method).toBe('GET');
+    req.flush(expectedJobs);
   });
 
-  it('addJob should make POST request to add a job', () => {
-    const newJob = {
-      jobTitle: "Developer",
-      jobDescription: "Test Description",
-      jobRequirements: "Test Requirements",
-      location: "Test Location",
-      benefits: "Test Benefits",
-      salaryRangeMin: 50000,
-      salaryRangeMax: 70000,
-      vacancyActive: true
-    };
-
-    service.addJob(newJob.jobTitle, newJob.jobDescription, newJob.jobRequirements, newJob.location, newJob.benefits, newJob.salaryRangeMin, newJob.salaryRangeMax, newJob.vacancyActive);
-
-    const req = httpTestingController.expectOne(`${BASE_URL}job/`);
-    expect(req.request.method).toEqual('POST');
-    expect(req.request.body).toEqual(newJob);
-    req.flush({ message: 'Job added' });
-  });
-
-  it('sendJobData should update jobData BehaviorSubject', () => {
-    const mockJobData = { title: 'New Job' };
-    service.sendJobData(mockJobData);
-
+  it('sendJobData should update currentData value', (done: DoneFn) => {
+    const newJobData = { id: 3, title: 'Manager' };
     service.currentData.subscribe(data => {
-      expect(data).toEqual(mockJobData);
+      if (data) {
+        expect(data).toEqual(newJobData);
+        done();
+      }
     });
+    service.sendJobData(newJobData);
   });
 });
