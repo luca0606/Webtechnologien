@@ -4,6 +4,8 @@ import { DataService } from '../service/data.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+
+
 @Component({
   selector: 'app-stellen',
   templateUrl: './stellen.component.html',
@@ -18,11 +20,12 @@ export class StellenComponent {
   user: any;
   userSubscription: Subscription = new Subscription();
 
+
   constructor(
     private stellenService: StellenService,
     private r: Router,
     private dataService: DataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     //Prüft zunächst ob gespeicherte Daten im lokalen Speicher sind
@@ -65,7 +68,11 @@ export class StellenComponent {
   }
   editJob() {
     //Klick auf Stelle pflegen
-    this.r.navigate(['/stellenpflege'], { state: { id: this.message._id,
-                                                   mode: 'edit' } });
+    this.r.navigate(['/stellenpflege'], {
+      state: {
+        id: this.message._id,
+        mode: 'edit'
+      }
+    });
   }
 }

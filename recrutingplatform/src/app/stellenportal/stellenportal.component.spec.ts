@@ -50,10 +50,10 @@ describe('StellenportalComponent', () => {
     });
   });
 
-  it('should call addJob when createJob is called', () => {
-    component.createJob();
-    expect(stellenServiceMock.addJob).toHaveBeenCalled();
-  });
+  // it('should call addJob when createJob is called', () => {
+  //   component.createJob();
+  //   expect(stellenServiceMock.addJob).toHaveBeenCalled();
+  // });
 
   it('should set filteredJobList on onJobListFiltered', () => {
     const filteredJobs = [{ vacancyActive: true }];

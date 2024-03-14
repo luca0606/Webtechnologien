@@ -6,9 +6,9 @@ import { BASE_URL } from '../shared/sharedData';
   providedIn: 'root',
 })
 export class BewerbenService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  addApplication(application:object) {
+  addApplication(application: object) {
     this.http.post(`${BASE_URL}application`, application)
       .subscribe((res) => {
         console.log(res + 'hai!');
@@ -16,8 +16,8 @@ export class BewerbenService {
       });
   }
 
-  async uploadApplication(FormData:FormData):Promise<any>{
-  
+  async uploadApplication(FormData: FormData): Promise<any> {
+
     this.http
       .post(`${BASE_URL}job/upload`, FormData)
       .subscribe((res) => {
