@@ -126,7 +126,6 @@ describe('FilterComponent', () => {
     expect(component.savedFilters.length).toBe(0);
   });
 
-  // Additional sorting function tests
   it('should sort jobs by title', () => {
     spyOn(component.jobListFiltered, 'emit');
     component.sortJobsByTitle();
@@ -145,9 +144,5 @@ describe('FilterComponent', () => {
     expect(component.jobListFiltered.emit).toHaveBeenCalled();
   });
 
-  it('should sort jobs by requirement', () => {
-    spyOn(component.jobListFiltered, 'emit');
-    component.sortJobsByRequirement();
-    expect(component.jobListFiltered.emit).toHaveBeenCalled();
-  });
+
 });

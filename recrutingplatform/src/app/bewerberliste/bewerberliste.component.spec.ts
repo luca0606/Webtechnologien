@@ -35,14 +35,14 @@ describe('BewerberlisteComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // describe('ngOnInit', () => {
-  //   it('should build application list', () => {
-  //     const mockApplications = [{}, {}]; // Simplified for brevity
-  //     bewerberlisteService.getApplList.and.returnValue(of(mockApplications));
-  //     component.ngOnInit();
-  //     expect(component.applicationList).toEqual(mockApplications);
-  //   });
-  // });
+  describe('ngOnInit', () => {
+    it('should build application list', async () => {
+      const mockApplications = [{ status: 'pending', id: '123' }, { status: 'pending', id: '123' }]
+      bewerberlisteService.getApplList.and.returnValue(of(mockApplications));
+      await component.ngOnInit();
+      expect(component.applicationList).toBeDefined();
+    });
+  });
 
   describe('ngOnDestroy', () => {
     it('should unsubscribe from all subscriptions', () => {
@@ -53,13 +53,11 @@ describe('BewerberlisteComponent', () => {
   });
 
   describe('buildApplList', () => {
-    // bunlarin icine veri yollamak gerekli. Bos oldugundan hata oluyor.
 
-    it('should set applicationList on success', () => {
-      // const mockApplications = [{}, {}];
-      const mockApplications = [{ status: 'pending', id: '123' }, { status: 'pending', id: '123']
+    it('should set applicationList on success', async () => {
+      const mockApplications = [{ status: 'pending', id: '123' }, { status: 'pending', id: '123' }]
       bewerberlisteService.getApplList.and.returnValue(of(mockApplications));
-      component.buildApplList();
+      await component.buildApplList();
       expect(component.applicationList).toEqual(mockApplications);
     });
 
