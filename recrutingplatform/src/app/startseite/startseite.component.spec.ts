@@ -32,7 +32,7 @@ describe('StartseiteComponent', () => {
   it('should have a link to the Stellenportal', () => {
     const compiled = fixture.debugElement.nativeElement;
     const anchorElement = compiled.querySelector('a');
-    expect(anchorElement.getAttribute('routerLink')).toEqual('/anmeldung');
+    expect(anchorElement.getAttribute('routerLink')).toEqual('/stellenportal');
     expect(anchorElement.textContent).toContain('Hier geht es zum Stellenportal!');
   });
 
