@@ -59,7 +59,6 @@ export class StellenpflegeComponent {
     if (this.mode == 'edit') {
       this.jobForm = this.fb.group({
         //Formular initialisieren
-        //_id: [this.job._id],
         benefits: [this.job.benefits],
         jobDescription: [this.job.jobDescription],
         jobRequirements: [this.job.jobRequirements],
@@ -68,9 +67,7 @@ export class StellenpflegeComponent {
         salaryRangeMax: [this.job.salaryRangeMax],
         salaryRangeMin: [this.job.salaryRangeMin],
         vacancyActive: [this.job.vacancyActive],
-        //__v: [this.job.__v]
       });
-      console.log(this.jobForm.value);
     }
     else {
       //Wenn mode = 'add' nicht vorausfüllen
@@ -90,7 +87,6 @@ export class StellenpflegeComponent {
   }
 
   async onPressSave() {
-    // Wenn Sie Änderungen speichern möchten, z.B. an einen Service oder an eine API senden:
     const updateValue = { ...this.jobForm.value };
     if (this.job._id) {
       await this.stellenpflegeService.saveChanges(this.id, updateValue);

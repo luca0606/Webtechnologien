@@ -10,10 +10,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./stellenportal.component.scss'],
 })
 export class StellenportalComponent {
+
   jobList: any[];
   unfilteredjobList: any[];
   isJobListLoaded: boolean = false;
-  user: any = undefined;
+  user: any;
 
   subscription: Subscription = new Subscription();
 
@@ -76,7 +77,6 @@ export class StellenportalComponent {
   }
 
   apply(job: any) {
-    //alert(job._id);
     this.r.navigate(['/bewerben'], { state: { id: job._id } });
   }
   editJob(job:any){

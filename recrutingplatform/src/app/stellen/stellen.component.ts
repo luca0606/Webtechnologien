@@ -52,7 +52,6 @@ export class StellenComponent {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    //Zwischen Daten werden gelöscht, sonst werden immer diese Anzeigedaten angezeigt
     localStorage.removeItem('job');
   }
 
@@ -62,8 +61,7 @@ export class StellenComponent {
   }
 
   apply() {
-    //Klick auf "Jetzt Bewerben" Button
-    //alert(this.message._id);
+    //Klick auf "Jetzt Bewerben" Button;
     this.r.navigate(['/bewerben'], { state: { id: this.message._id } });
   }
   editJob() {

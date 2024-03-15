@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { BewerberlisteService } from '../service/bewerberliste.service';
-import { DataService } from '../service/data.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -17,8 +16,6 @@ export class BewerberlisteComponent {
   constructor(private applService: BewerberlisteService, private r: Router) { }
 
   ngOnInit() {
-    // get user from data service
-
     this.buildApplList();
   }
 

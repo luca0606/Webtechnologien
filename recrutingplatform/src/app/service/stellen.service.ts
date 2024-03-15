@@ -13,8 +13,6 @@ export class StellenService {
 
   constructor(private http: HttpClient) {}
 
-  //Funktionen für Bewerbersicht
-
   getJobList(): Observable<any> {
     // Dies gibt ein Observable zurück, das von der aufrufenden Stelle abonniert werden kann
     return this.http.get(`${BASE_URL}job`);
