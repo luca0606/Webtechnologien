@@ -16,19 +16,22 @@ export class BewerbenComponent {
   selectedFile: File= null;
 
   id:any;
+  job:object;
+  jobTitle:string;
 
   constructor(
     private fb: FormBuilder,
     private rg: BewerbenService,
     private router: Router
   ) {
-    //const navigation = this.router.getCurrentNavigation();
-    //this.id = navigation?.extras.state['id'];
-    //console.log(this.id);
+    const navigation = this.router.getCurrentNavigation();
+    this.id = navigation?.extras.state['id'];
+    console.log(this.id);
   }
 
   ngOnInit() {
-  
+    this.getJobTitle();
+
     this.bewerbenForm = this.fb.group({
       applicationTitle: [''],
       filePath:[''] ,
@@ -71,4 +74,18 @@ export class BewerbenComponent {
     await this.rg.uploadApplication(formData);
 
   }
+
+ async getJobTitle(){
+    console.log('getJobTitle');
+    if(this.id){
+      this.job = await this.rg.getJobByID(this.id).subscribe(
+        (job: any) => {
+          this.jobTitle = job['jobTitle'];
+        },
+        (error) => {
+          console.error('Fehler beim Laden des Jobs:', error);
+        }
+      );
+  }
+}
 }

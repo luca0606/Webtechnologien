@@ -1,63 +1,4 @@
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-  }
   
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-  
-  nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  nav li {
-    margin-right: 1rem;
-    display: flex;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  section {
-    margin-top: 4rem;
-    margin-bottom: 40%;
-  
-    flex: 1; /* Fülle den verfügbaren Raum aus */
-  }
-  
-  footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    width: 100%;
-    position: absolute;
-    top:900px;
-  
-    /* Toggle */
-  }
 
   .toggle-container {
     display: inline-block;
@@ -67,8 +8,8 @@ body {
   .toggle-label {
     display: block;
     cursor: pointer;
-    width: 120px; /* Adjust width as needed */
-    height: 40px; /* Adjust height as needed */
+    width: 150px; 
+    height: 40px; 
     background-color: #ccc;
     border-radius: 20px;
     transition: background-color 0.2s;
@@ -87,7 +28,10 @@ body {
   }
   
   .toggle-slider {
+    color: white; /* Weißer Text im Slider */
     position: absolute;
+    white-space: nowrap; /* Verhindert das Überlaufen des Textes */
+    overflow: hidden; /* Schneidet überlaufenden Text ab */
     background-color: #2196F3;
     border-radius: 20px;
     transition: 0.3s;
@@ -109,49 +53,67 @@ body {
     background-color: #ccc; /* Color when toggled */
   }
   
-  .slider-text {
-    color: #fff;
-    pointer-events: none;
-  }
+  /* Registrierungsformular */
+.form-wrapper {
+  max-width: 500px;
+  margin: 60px auto 2rem; /* 60px oben, zentriert horizontal, 2rem unten */
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+}
 
-  /*Registrierungsformular*/
-  .form-wrapper {
-    max-width: 500px;
-    margin: 2rem auto;
-    margin-top: 60px;
-    padding: 20px;
-    background: #f9f9f9;
-    border: 1px solid #ebebeb;
-    border-radius: 4px;
-  }
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
 
-  .form-container {
-    display: flex;
-    flex-direction: column;
-  }
+.form-control {
+  display: flex;
+  flex-direction: column; /* Anordnung der Labels und Inputs in Spalten */
+  margin-bottom: 20px;
+}
 
-  .form-control {
-    margin-bottom: 20px;
-  }
+.form-control label {
+  margin-bottom: 5px; /* Einen kleinen Abstand zwischen Label und zugehörigem Input-Feld */
+}
 
-  input {
-    position:absolute;
-    left: 850px;
-  }
+.form-control input[type="text"],
+.form-control input[type="email"],
+.form-control input[type="tel"],
+.form-control input[type="number"],
+.form-control input[type="password"],
+.form-control input[type="date"] {
+  width: 96%; /* Inputs nehmen die verfügbare Breite ein */
+  padding: 10px; /* Etwas Polsterung für besseres Aussehen */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 5px;
+}
 
-  #buttonGroup{
-    display: flex;
-    flex-direction: column;
-  }
+#buttonGroup {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px; 
+  margin-bottom: 20px;/* Etwas Abstand zum Rest des Formulars */
+}
 
-  button {
-    position: relative;
-    bottom: 15px;
-    left: 20px;
-  }
+button {
+  /* Positionieren auf Basis von Flexbox, ohne absolute Positionierung */
+  margin-bottom: 10px; /* Abstand zwischen den Buttons */
+  padding: 10px 20px; /* Polsterung für den Button */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-#anmeldeButton{
-  position:relative;
-  top: 15px;
-  left: 2px;
+#buttonGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Ausrichtung der Buttons am Anfang des Containers */
+  gap: 10px; /* Abstand zwischen den Elementen in buttonGroup */
+}
+
+#successtext{
+  margin-bottom: 20px;
 }

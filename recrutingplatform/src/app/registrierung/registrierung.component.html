@@ -1,5 +1,6 @@
 <!-- Registrierungsformular -->
 <div class="form-wrapper">
+    <h2>Registrierung</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-control">
             <label for="vorname">Vorname:</label>
@@ -41,20 +42,20 @@
             <label for="passwort">Passwort:</label>
             <input type="password" id="passwort" formControlName="passwort">
         </div>
-        <!-- Toggle-->
-        <div class="toggle-container">
-            <input type="checkbox" id="toggle-button" (change)="toggleRole()" [checked]="isRecruiter">
-            <label for="toggle-button" class="toggle-label">
-                <span class="toggle-slider">
-                    <span class="slider-text">{{ isRecruiter ? 'Recruiter' : 'Bewerber' }}</span>
-                </span>
-            </label>
-        </div>
-        <button *ngIf="!registrationSuccessful" type="submit" [disabled]="!registerForm.valid" >Registrieren</button>
-        <div>
-            <div *ngIf="registrationSuccessful">Registrierung erfolgreich!</div>
-            <button *ngIf="registrationSuccessful" id='anmeldeButton' routerLink="/anmeldung">Weiter zur
-                Anmeldung</button>
-        </div>
+
+        <div id="buttonGroup">
+            <div class="toggle-container">
+              <input type="checkbox" id="toggle-button" (change)="toggleRole()" [checked]="isRecruiter"/>
+              <label for="toggle-button" class="toggle-label">
+                <div class="toggle-slider">
+                  <span class="slider-text">{{ isRecruiter ? 'Recruiter' : 'Bewerber' }}</span>
+                </div>
+              </label>
+            </div>
+            <button id="registerButton"  *ngIf="!registrationSuccessful"  [disabled]="!registerForm.valid">Registrieren</button>
+          </div>
+          <div id="successtext" *ngIf="registrationSuccessful">Registrierung erfolgreich!</div>
+          <button *ngIf="registrationSuccessful" id='anmeldeButton' (click)="routeAnmeldung()">Weiter zur
+            Anmeldung</button>
     </form>
 </div>
