@@ -34,6 +34,7 @@ export class RegistrierungComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.registerForm.valid)
     if (this.registerForm.valid) {
       try {
         this.rg.addUser(
@@ -49,9 +50,6 @@ export class RegistrierungComponent implements OnInit {
         );
 
         this.registrationSuccessful = true;
-        // navigate to the login page after successful registration
-        this.r.navigate(['/anmeldung']);
-        // reset the form after successful registration
         this.registerForm.reset();
       } catch (error) {
         console.error('Registration failed:', error);
@@ -65,6 +63,10 @@ export class RegistrierungComponent implements OnInit {
   toggleRole(): void {
     console.log(this.isRecruiter);
     this.isRecruiter = !this.isRecruiter;
+  }
+
+  routeAnmeldung(){
+    this.r.navigate(['/anmeldung']);
   }
 
 }

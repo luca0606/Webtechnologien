@@ -1,38 +1,40 @@
-<section>
-  <br />
-  <h2>Job-Bezeichnung</h2>
-  <p>Hier steht nochmal eine kurze Stellenbeschreibung</p>
-  <form
-    [formGroup]="bewerbenForm"
-    enctype="multipart/form-data"
-  >
-    <div>
-      <label for="applicationTitle"><h4>Bewerbung:</h4></label>
-      <textarea
-        id="bewerbungstext"
-        name="bewerbungstext"
-        rows="8"
-        cols="50"
-        required
-        formControlName="applicationTitle"
-      ></textarea>
-    </div>
-    <div>
-      <label for="filePath"><h4>Dokument hochladen:</h4></label>
-      <input
-        type="file"
-        id="dokument"
-        name="dokument"
-        (change)="onFileSelected($event)"
-        accept=".pdf, .doc, .docx, .txt"
-        required
-        class="dokument-button"
-        formControlName="filePath"
-      />
-    </div>
-    <div *ngIf="isUploaded" class="uploaded-message">Datei hochgeladen</div>
+<div class="background-container">
+  <div class="form-wrapper">
     <br />
-    <button type="button" class="bewerben-button" (click)="onSubmit()">Bewerbung abschicken</button>
-  </form>
-</section>
+    <h2>Bewerbung: {{jobTitle}}</h2>
+    <form
+      [formGroup]="bewerbenForm"
+      enctype="multipart/form-data"
+    >
+      <div>
+        <label for="applicationTitle"><h4>Bewerbung:</h4></label>
+        <textarea
+          id="bewerbungstext"
+          name="bewerbungstext"
+          rows="8"
+          cols="50"
+          required
+          formControlName="applicationTitle"
+        ></textarea>
+      </div>
+      <div>
+        <label for="filePath"><h4>Dokument hochladen:</h4></label>
+        <input
+          type="file"
+          id="dokument"
+          name="dokument"
+          (change)="onFileSelected($event)"
+          accept=".pdf, .doc, .docx, .txt"
+          required
+          class="dokument-button"
+          formControlName="filePath"
+        />
+      </div>
+      <div *ngIf="isUploaded" class="uploaded-message">Datei hochgeladen</div>
+      <br />
+      <button type="button" class="apply-button" (click)="onSubmit()">Bewerbung abschicken</button>
+    </form>
+  </div>
+</div>
+
 
