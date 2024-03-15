@@ -3,7 +3,6 @@ import { HeaderComponent } from './header.component';
 import { AuthService } from 'src/app/service/auth.service';
 import { DataService } from 'src/app/service/data.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ChangeDetectorRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 describe('HeaderComponent', () => {
@@ -12,13 +11,17 @@ describe('HeaderComponent', () => {
   let authServiceMock: jasmine.SpyObj<AuthService>;
   let dataServiceMock: jasmine.SpyObj<DataService>;
   let isLoggedInSubject: BehaviorSubject<boolean>;
+  let userSubject: BehaviorSubject<any>;
 
   beforeEach(async () => {
-    // Mock AuthService and DataService
     authServiceMock = jasmine.createSpyObj('AuthService', ['abmelden']);
     isLoggedInSubject = new BehaviorSubject<boolean>(false);
-    dataServiceMock = jasmine.createSpyObj('DataService', ['currentIsLoggedIn']);
-    dataServiceMock.currentIsLoggedIn = isLoggedInSubject.asObservable();
+    userSubject = new BehaviorSubject<any>({ recruiterRole: false });
+
+    dataServiceMock = jasmine.createSpyObj('DataService', [], {
+      currentIsLoggedIn: isLoggedInSubject.asObservable(),
+      user$: userSubject.asObservable()
+    });
 
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
@@ -26,7 +29,6 @@ describe('HeaderComponent', () => {
       providers: [
         { provide: AuthService, useValue: authServiceMock },
         { provide: DataService, useValue: dataServiceMock },
-        ChangeDetectorRef
       ]
     }).compileComponents();
 
@@ -35,7 +37,6 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -43,17 +44,18 @@ describe('HeaderComponent', () => {
   it('should update isLoggedIn when data service emits', () => {
     isLoggedInSubject.next(true);
     fixture.detectChanges();
-
     expect(component.isLoggedIn).toBeTrue();
+  });
+
+  it('should update user when data service emits', () => {
+    const testUser = { name: 'Test User', recruiterRole: true };
+    userSubject.next(testUser);
+    fixture.detectChanges();
+    expect(component.user).toEqual(testUser);
   });
 
   it('should call abmelden method of AuthService when abmelden is called', () => {
     component.abmelden();
     expect(authServiceMock.abmelden).toHaveBeenCalled();
-  });
-
-  it('should unsubscribe on ngOnDestroy', () => {
-    component.ngOnDestroy();
-    expect().nothing();
   });
 });
