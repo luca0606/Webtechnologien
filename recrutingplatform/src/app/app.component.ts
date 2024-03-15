@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
 
 
   abmelden() {
-    console.log("hollolllliii")
     this.authService.abmelden()
   }
 

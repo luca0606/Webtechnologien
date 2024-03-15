@@ -15,22 +15,6 @@
         </button>
     </span>
 
-    <input
-        type="text"
-        class="search-input"
-        placeholder="Requirements suchen..."
-        [(ngModel)]="filter.requirement"
-        (input)="applyFilters()"
-    >
-    <span>
-        <button
-            class="btn btn-sort"
-            (click)="sortJobsByRequirement()"
-        >
-            Sort nach req.
-        </button>
-    </span>
-
     <select
         class="filter"
         [(ngModel)]="filter.location"
@@ -100,10 +84,6 @@
         <div class="filterItem">
             <span class="filterLabel">Titel:</span>
             <span class="filterValue">{{ savedFilter.title }}</span>
-        </div>
-        <div class="filterItem">
-            <span class="filterLabel">Anforderung:</span>
-            <span class="filterValue">{{ savedFilter.requirement }}</span>
         </div>
         <div class="filterItem">
             <span class="filterLabel">Ort:</span>

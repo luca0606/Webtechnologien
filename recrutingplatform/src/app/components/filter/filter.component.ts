@@ -177,12 +177,6 @@ export class FilterComponent {
     this.jobListFiltered.emit(this.jobList);
   }
 
-  //sort and emit jobs by requirement
-  sortJobsByRequirement() {
-    this.jobList.sort((a, b) => a.jobRequirements.localeCompare(b.jobRequirements));
-    this.jobListFiltered.emit(this.jobList);
-  }
-
   ngOnInit() {
     this.jobList ? this.createFilterArrays() : "";
     this.jobList ? this.createLocalJobList() : "";
