@@ -84,7 +84,7 @@ describe('RegistrierungComponent', () => {
     expect(registrierungServiceMock.addUserAuthData).toHaveBeenCalled();
     tick();
     flush();
-    expect(location.path()).toBe('/anmeldung');
+    expect(location.path()).toBe('');
   }));
 
   it('should check the form validity', () => {

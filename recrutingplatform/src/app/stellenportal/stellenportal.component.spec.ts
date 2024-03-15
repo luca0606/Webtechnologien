@@ -50,10 +50,32 @@ describe('StellenportalComponent', () => {
     });
   });
 
-  // it('should call addJob when createJob is called', () => {
-  //   component.createJob();
-  //   expect(stellenServiceMock.addJob).toHaveBeenCalled();
-  // });
+  it('should not filter jobList for Recruitersicht', () => {
+    dataServiceMock.user$ = of({ recruiterRole: true });
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.jobList.length).toBe(2);
+    });
+  });
+
+  it('should call buildJobList on ngOnInit', () => {
+    spyOn(component, 'buildJobList');
+    component.ngOnInit();
+    expect(component.buildJobList).toHaveBeenCalled();
+  });
+
+  it('should set jobList and isJobListLoaded on buildJobList', async () => {
+    await component.buildJobList();
+    expect(stellenServiceMock.getJobList).toHaveBeenCalled();
+    expect(component.jobList).toBeDefined();
+    expect(component.isJobListLoaded).toBeTrue();
+  });
+
+  it('should call ngOnDestroy', () => {
+    spyOn(component.subscription, 'unsubscribe');
+    component.ngOnDestroy();
+    expect(component.subscription.unsubscribe).toHaveBeenCalled();
+  });
 
   it('should set filteredJobList on onJobListFiltered', () => {
     const filteredJobs = [{ vacancyActive: true }];

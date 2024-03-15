@@ -54,4 +54,14 @@ describe('DataService', () => {
     });
   });
 
+  // chekck if user data is emitted
+  it('should emit user data', (done) => {
+    const mockUser = { email: 'test@test.com', name: 'Test User' };
+    dataService.updateUser(mockUser);
+    dataService.getUser().subscribe(user => {
+      expect(user).toEqual(mockUser);
+      done();
+    });
+  });
+
 });

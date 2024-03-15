@@ -45,6 +45,8 @@ describe('BewerberlisteService', () => {
     req.flush(dummyResponse);
   });
 
+
+
   it('setMessage() should make PATCH request and return updated data', async () => {
     const dummyResponse = { success: true };
 

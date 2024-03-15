@@ -10,7 +10,7 @@ export class BewerberlisteService {
   private applData = new BehaviorSubject<any>(null); // Initialwert für den Datenstrom
   currentData = this.applData.asObservable(); // Observable, auf das Komponenten subscriben können
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   //Funktionen für Bewerbersicht
 
@@ -63,25 +63,25 @@ export class BewerberlisteService {
     }
   }
 
-  async downloadAppl(fileName:string):Promise<Blob>{
+  async downloadAppl(fileName: string): Promise<Blob> {
     try {
       console.log('das ist filename ' + fileName);
       const response = await firstValueFrom(
         this.http.get(`${BASE_URL}job/download/${fileName}`, { responseType: 'blob' })
       );
       console.log(response);
-    
-    //Download im Browser ausführen  
-    const url = window.URL.createObjectURL(response);
-    const a = document.createElement('a'); //HTML-Link Element
-    a.href = url;
-    a.download = fileName;
-    document.body.appendChild(a); // Hinzufügen des Links zum Dokument
-    a.click();
-    window.URL.revokeObjectURL(url);
-    a.remove(); // Entfernt den Link aus dem Dokument
 
-    return response;
+      //Download im Browser ausführen  
+      const url = window.URL.createObjectURL(response);
+      const a = document.createElement('a'); //HTML-Link Element
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a); // Hinzufügen des Links zum Dokument
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove(); // Entfernt den Link aus dem Dokument
+
+      return response;
     } catch (error) {
       console.error('Error Downloading Application:', error);
       throw error;

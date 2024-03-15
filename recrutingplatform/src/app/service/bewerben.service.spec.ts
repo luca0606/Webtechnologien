@@ -39,4 +39,28 @@ describe('BewerbenService', () => {
 
     req.flush({ success: true });
   });
+
+
+  it('getJobByID() should make GET request', () => {
+    const dummyJob = {
+      _id: '1',
+      benefits: 'Nice environment',
+      jobDescription: 'Developer position',
+      jobRequirements: 'Requirements',
+      jobTitle: 'Developer',
+      location: 'Berlin',
+      salaryRangeMax: 60000,
+      salaryRangeMin: 50000,
+      vacancyActive: true
+    };
+
+    service.getJobByID('1').subscribe(job => {
+      expect(job).toEqual(dummyJob);
+    });
+
+    const req = httpMock.expectOne(`${BASE_URL}job/1`);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyJob);
+  });
+
 });
