@@ -1,35 +1,63 @@
 <section>
     <div id="login">
-    <h2>Stellenportal Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <!-- E-Mail-Feld -->
-        <div class="form-group">
-            <label for="email">E-Mail:</label>
-            <input type="email" formControlName="email" id="email" required>
-            <div *ngIf="loginForm.get('email')?.touched">
-                <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['required']">
-                    E-Mail ist erforderlich.
-                </small>
-                <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['email']">
-                    Bitte eine gültige E-Mail angeben.
-                </small>
+        <h2>Stellenportal Login</h2>
+        <form
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+        >
+            <!-- E-Mail-Feld -->
+            <div class="form-group">
+                <label for="email">E-Mail:</label>
+                <input
+                    type="email"
+                    formControlName="email"
+                    id="email"
+                    required
+                >
+                <div *ngIf="loginForm.get('email')?.touched">
+                    <small
+                        class="text-danger"
+                        *ngIf="loginForm.get('email')?.errors?.['required']"
+                    >
+                        E-Mail ist erforderlich.
+                    </small>
+                    <small
+                        class="text-danger"
+                        *ngIf="loginForm.get('email')?.errors?.['email']"
+                    >
+                        Bitte eine gültige E-Mail angeben.
+                    </small>
+                </div>
             </div>
-        </div>
 
-        <!-- Passwort-Feld -->
-        <div class="form-group">
-            <label for="password">Passwort:</label>
-            <input type="password" formControlName="password" id="password" required>
-            <div *ngIf="loginForm.get('password')?.touched">
-                <small class="text-danger" *ngIf="loginForm.get('password')?.errors?.['required']">
-                    Passwort ist erforderlich.
-                </small>
+            <!-- Passwort-Feld -->
+            <div class="form-group">
+                <label for="password">Passwort:</label>
+                <input
+                    type="password"
+                    formControlName="password"
+                    id="password"
+                    required
+                >
+                <div *ngIf="loginForm.get('password')?.touched">
+                    <small
+                        class="text-danger"
+                        *ngIf="loginForm.get('password')?.errors?.['required']"
+                    >
+                        Passwort ist erforderlich.
+                    </small>
+                </div>
             </div>
-        </div>
-        <div id='buttonGroup'>
-            <button type="submit" [disabled]="loginForm.invalid">Anmelden</button>
-            <button routerLink="/registrierung">Registrieren</button>
-        </div>
-    </form>
+            <div id='buttonGroup'>
+                <button
+                    type="submit"
+                    [disabled]="loginForm.invalid"
+                >Anmelden</button>
+                <button
+                    class="registrierungButton"
+                    routerLink="/registrierung"
+                >Registrieren</button>
+            </div>
+        </form>
     </div>
 </section>
