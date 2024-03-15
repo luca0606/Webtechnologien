@@ -17,7 +17,7 @@ describe('BewerberlisteService', () => {
   });
 
   afterEach(() => {
-    httpMock.verify(); // Açıkta kalmış HTTP istekleri yoksa test başarılı
+    httpMock.verify();
   });
 
   it('should make GET request to retrieve application list', async () => {
@@ -44,6 +44,8 @@ describe('BewerberlisteService', () => {
     expect(req.request.method).toBe('PATCH');
     req.flush(dummyResponse);
   });
+
+
 
   it('setMessage() should make PATCH request and return updated data', async () => {
     const dummyResponse = { success: true };

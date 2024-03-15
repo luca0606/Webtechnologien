@@ -56,4 +56,5 @@ describe('RegistrierungService', () => {
     expect(req.request.body).toEqual({ email: email, password: hashedPassword });
     req.flush({ message: 'AuthData added' });
   });
+
 });

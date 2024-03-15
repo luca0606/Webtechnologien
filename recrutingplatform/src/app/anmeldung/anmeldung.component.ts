@@ -25,7 +25,6 @@ export class AnmeldungComponent {
       this.loginForm.value.email,
       hashPassword(this.loginForm.value.password)
     );
-
   }
 
   toggleRole(): void {

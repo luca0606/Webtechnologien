@@ -60,6 +60,7 @@ export class FilterService {
       throw error;
     }
   }
+
   /**
    * 
    * @param filter
@@ -73,6 +74,4 @@ export class FilterService {
         console.log(res);
       });
   }
-
-
 }

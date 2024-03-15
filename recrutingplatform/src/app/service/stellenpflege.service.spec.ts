@@ -54,4 +54,28 @@ describe('StellenpflegeService', () => {
     req.flush({});
     flush();
   }));
+
+  it('getJobById should return job by id', fakeAsync(() => {
+    const job = { _id: '1', title: 'Developer' };
+    service.getJobById('1').subscribe(response => {
+      expect(response).toEqual(job);
+    });
+
+    const req = httpTestingController.expectOne(`${BASE_URL}job`);
+    expect(req.request.method).toEqual('GET');
+    req.flush([job]);
+    flush();
+  }));
+
+  it('getJobById should return undefined if job not found', fakeAsync(() => {
+    service.getJobById('1').subscribe(response => {
+      expect(response).toEqual(undefined);
+    });
+
+    const req = httpTestingController.expectOne(`${BASE_URL}job`);
+    expect(req.request.method).toEqual('GET');
+    req.flush([]);
+    flush();
+  }));
+
 });

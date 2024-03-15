@@ -45,16 +45,4 @@ describe('BewerbenComponent', () => {
     expect(bewerbenService.uploadApplication).not.toHaveBeenCalled();
   });
 
-  // Does not work. Needs to be fixed..
-
-  // it('should call addApplication and uploadApplication on form submission if form is valid', () => {
-  //   component.bewerbenForm.controls['applicationTitle'].setValue('Test Title');
-  //   component.selectedFile = new File([''], 'test.pdf');
-  //   // component.bewerbenForm.controls['filePath'].setValue(component.selectedFile);
-  //   component.bewerbenForm.controls['status'].setValue('Bewerbung eingegangen');
-  //   component.onSubmit();
-  //   expect(bewerbenService.addApplication).toHaveBeenCalled();
-  //   expect(bewerbenService.uploadApplication).toHaveBeenCalled();
-  // });
-
 });

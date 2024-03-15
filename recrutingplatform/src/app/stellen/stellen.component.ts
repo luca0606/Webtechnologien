@@ -12,11 +12,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./stellen.component.scss'],
 })
 export class StellenComponent {
-  //message hält die empfangenen Daten vom Parent Component
   message: any;
   subscription: Subscription;
 
-  //Aktiver User
   user: any;
   userSubscription: Subscription = new Subscription();
 
@@ -28,7 +26,6 @@ export class StellenComponent {
   ) { }
 
   ngOnInit() {
-    //Prüft zunächst ob gespeicherte Daten im lokalen Speicher sind
     const savedJob = localStorage.getItem('job');
 
     this.userSubscription = this.dataService.user$.subscribe((user) => {

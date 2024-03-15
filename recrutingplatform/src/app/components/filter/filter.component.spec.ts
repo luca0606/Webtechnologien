@@ -11,17 +11,15 @@ describe('FilterComponent', () => {
   let filterServiceMock: jasmine.SpyObj<FilterService>;
 
   beforeEach(async () => {
-    // Mock the FilterService with necessary methods
     filterServiceMock = jasmine.createSpyObj('FilterService', ['getFilters', 'addFilter', 'deleteFilter', 'updateFilter']);
 
-    // Mock response for getFilters()
     filterServiceMock.getFilters.and.returnValue(of([{ title: 'Mock Filter' }]));
 
     await TestBed.configureTestingModule({
       declarations: [FilterComponent],
       imports: [FormsModule, ReactiveFormsModule],
       providers: [{ provide: FilterService, useValue: filterServiceMock }],
-      schemas: [NO_ERRORS_SCHEMA] // Ignore unrecognized elements and directives
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(FilterComponent);
@@ -143,6 +141,5 @@ describe('FilterComponent', () => {
     component.sortJobsBySalary();
     expect(component.jobListFiltered.emit).toHaveBeenCalled();
   });
-
 
 });

@@ -27,7 +27,8 @@ describe('StellenpflegeComponent', () => {
         vacancyActive: true
       })),
       saveChanges: jasmine.createSpy('saveChanges').and.returnValue(of({})),
-      deleteJob: jasmine.createSpy('deleteJob').and.returnValue(of({}))
+      deleteJob: jasmine.createSpy('deleteJob').and.returnValue(of({})),
+      addJob: jasmine.createSpy('addJob').and.returnValue(of({}))
     };
 
     await TestBed.configureTestingModule({
@@ -55,15 +56,13 @@ describe('StellenpflegeComponent', () => {
   });
 
   it('should call saveChanges on pressSave and show success message', async () => {
-    // Prepare the component with the necessary data
-    component.job = { _id: 'mockId', /* other properties */ };
-    component.id = 'mockId'; // Ensure the ID is also set if it's coming from somewhere else like router params
-    component.initForm(); // Initialize the form with mock data if necessary
+    component.job = { _id: 'mockId', };
+    component.id = 'mockId';
+    component.initForm();
 
     await component.onPressSave();
 
     expect(stellenpflegeServiceMock.saveChanges).toHaveBeenCalledWith('mockId', jasmine.any(Object));
-    // Check for the success message
     expect(component.successfulEdit).toBeTrue();
   });
 
@@ -77,5 +76,40 @@ describe('StellenpflegeComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['/stellenportal']);
   });
 
-  // Add more tests as necessary
+  it('when mode is add should call addJob', async () => {
+    component.mode = 'add';
+    await component.onPressAdd();
+    expect(stellenpflegeServiceMock.addJob).toHaveBeenCalled();
+  });
+
+  it('should initialize the form with job data when mode is edit', () => {
+    component.mode = 'edit';
+    component.id = '1';
+    component.ngOnInit();
+    expect(component.jobForm.value).toEqual({
+      benefits: 'Nice environment',
+      jobDescription: 'Developer position',
+      jobRequirements: 'Requirements',
+      jobTitle: 'Developer',
+      location: 'Berlin',
+      salaryRangeMax: 60000,
+      salaryRangeMin: 50000,
+      vacancyActive: true
+    });
+  });
+
+  it('should initialize the form with empty values when mode is add', () => {
+    component.mode = 'add';
+    component.ngOnInit();
+    expect(component.jobForm.value).toEqual({
+      benefits: '',
+      jobDescription: '',
+      jobRequirements: '',
+      jobTitle: '',
+      location: '',
+      salaryRangeMax: '',
+      salaryRangeMin: '',
+      vacancyActive: ''
+    });
+  });
 });

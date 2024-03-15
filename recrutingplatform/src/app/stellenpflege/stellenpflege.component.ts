@@ -17,7 +17,6 @@ export class StellenpflegeComponent {
   navigation: any;
   changedValues: any;
 
-  //Statusmeldungen
   successfulAdd: boolean = false;
   successfulEdit: boolean = false;
   successfulDeletion: boolean = false;
@@ -39,14 +38,11 @@ export class StellenpflegeComponent {
       }
     }
     else {
-      //Für Mode = add werden keine Jobdaten benötigt
       this.initForm();
     }
   }
   getJob() {
-    //Job-Objekt ermittelt, den man bearbeiten möchte
     this.id = this.navigation?.extras.state?.["id"];
-    //Job-Daten anhand der ObjectID laden
     this.stellenpflegeService.getJobById(this.id).subscribe(job => {
       this.job = job;
       console.log('dieser job: ' + this.job.jobTitle);
@@ -58,7 +54,6 @@ export class StellenpflegeComponent {
 
     if (this.mode == 'edit') {
       this.jobForm = this.fb.group({
-        //Formular initialisieren
         benefits: [this.job.benefits],
         jobDescription: [this.job.jobDescription],
         jobRequirements: [this.job.jobRequirements],
@@ -70,9 +65,7 @@ export class StellenpflegeComponent {
       });
     }
     else {
-      //Wenn mode = 'add' nicht vorausfüllen
       this.jobForm = this.fb.group({
-        //Formular initialisieren
         benefits: [''],
         jobDescription: [''],
         jobRequirements: [''],
@@ -83,7 +76,6 @@ export class StellenpflegeComponent {
         vacancyActive: ['']
       });
     }
-
   }
 
   async onPressSave() {

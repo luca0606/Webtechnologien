@@ -14,7 +14,6 @@ describe('DataService', () => {
     expect(dataService).toBeTruthy();
   });
 
-
   it('should emit true when isLoggedIn is set to true', (done) => {
     dataService.updateIsLoggedIn(true);
     dataService.getIsLoggedIn().subscribe(isLoggedIn => {
@@ -30,8 +29,6 @@ describe('DataService', () => {
       done();
     });
   });
-
-
 
   it('should save and get user to/from localStorage correctly', () => {
     const mockUser = { email: 'test@test.com', name: 'Test User' };
@@ -54,4 +51,12 @@ describe('DataService', () => {
     });
   });
 
+  it('should emit user data', (done) => {
+    const mockUser = { email: 'test@test.com', name: 'Test User' };
+    dataService.updateUser(mockUser);
+    dataService.getUser().subscribe(user => {
+      expect(user).toEqual(mockUser);
+      done();
+    });
+  });
 });

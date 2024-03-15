@@ -23,18 +23,15 @@ export class BewerbenService {
       .post(`${BASE_URL}job/upload`, FormData)
       .subscribe((res) => {
         return true;
-        console.log(res);
       });
-
   }
 
-   getJobByID(id:any): Observable<any> {
-      // Dies gibt ein Observable zurück, das von der aufrufenden Stelle abonniert werden kann
-      return this.http.get(`${BASE_URL}job/${id}`);
-    }
-
+  getJobByID(id: any): Observable<any> {
+    return this.http.get(`${BASE_URL}job/${id}`);
   }
 
-  
+}
+
+
 
 
