@@ -35,4 +35,5 @@ describe('StartseiteComponent', () => {
     expect(anchorElement.getAttribute('routerLink')).toEqual('/anmeldung');
     expect(anchorElement.textContent).toContain('Hier geht es zum Stellenportal!');
   });
+
 });

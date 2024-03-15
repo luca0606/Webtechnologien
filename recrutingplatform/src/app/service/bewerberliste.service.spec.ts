@@ -17,7 +17,7 @@ describe('BewerberlisteService', () => {
   });
 
   afterEach(() => {
-    httpMock.verify(); // Açıkta kalmış HTTP istekleri yoksa test başarılı
+    httpMock.verify();
   });
 
   it('should make GET request to retrieve application list', async () => {

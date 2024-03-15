@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as CryptoJS from 'crypto-js';
+import { BASE_URL } from '../shared/sharedData';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,10 @@ export class RegistrierungService {
       firstname: firstName,
       lastname: lastName,
       email: email,
-      // password: this.hashPassword(password),
       recruiterRole: role
     }
     try {
-      this.http.post("http://localhost:3000/user/register", user)
+      this.http.post(`${BASE_URL}user/register`, user)
         .subscribe((res) => {
           console.log(res)
         })
@@ -41,7 +41,7 @@ export class RegistrierungService {
       password: this.hashPassword(password)
     }
 
-    this.http.post("http://localhost:3000/auth/", user).subscribe(res => {
+    this.http.post(`${BASE_URL}auth/`, user).subscribe(res => {
       console.log(res)
       console.log('AuthData added')
     })

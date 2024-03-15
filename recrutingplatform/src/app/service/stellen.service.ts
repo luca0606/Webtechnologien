@@ -7,18 +7,17 @@ import { BASE_URL } from '../shared/sharedData'
   providedIn: 'root'
 })
 export class StellenService {
-  private jobData = new BehaviorSubject<any>(null); // Initialwert für den Datenstrom
-  currentData = this.jobData.asObservable(); // Observable, auf das Komponenten subscriben können
+  private jobData = new BehaviorSubject<any>(null);
+  currentData = this.jobData.asObservable();
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getJobList(): Observable<any> {
-    // Dies gibt ein Observable zurück, das von der aufrufenden Stelle abonniert werden kann
     return this.http.get(`${BASE_URL}job`);
   }
 
-  sendJobData(message:any){
-    this.jobData.next(message) //Datenübergabe an den nächsten Component
+  sendJobData(message: any) {
+    this.jobData.next(message)
   }
 }

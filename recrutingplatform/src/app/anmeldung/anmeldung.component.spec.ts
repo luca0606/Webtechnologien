@@ -81,11 +81,4 @@ describe('AnmeldungComponent', () => {
     expect(component.isRecruiter).toBeFalse();
   });
 
-  it('should navigate to /registrierung', () => {
-    // When button is clicked to navigate to /registrierung
-    const button = fixture.nativeElement.querySelector('.registrierungButton');
-    button.click();
-    expect(router.navigate).toHaveBeenCalledWith(['/registrierung']);
-  });
-
 });

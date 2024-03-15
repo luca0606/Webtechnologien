@@ -1,11 +1,7 @@
 const cors = require("cors")
 // define allowed urls to make request from this api. 
-const whitelist = ["http://localhost:4200", "http://localhost:56610", "http://localhost:56610"]
+const whitelist = ["http://localhost:4200"]
 const corsOptions = {
-
-    // To get rid of url problem for development phase. 
-    // Commented code will be uncommented before submission.
-    // origin: "*"
 
     origin: function (origin, callback) {
         if (!origin || whitelist.indexOf(origin) !== -1) {

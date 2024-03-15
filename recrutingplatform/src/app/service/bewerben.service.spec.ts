@@ -25,15 +25,13 @@ describe('BewerbenService', () => {
     service.addApplication(dummyApplication);
     const req = httpMock.expectOne(`${BASE_URL}application`);
     expect(req.request.method).toBe('POST');
-    req.flush(dummyApplication); // Simulate the server response
+    req.flush(dummyApplication);
   });
 
   it('uploadApplication() should make POST request for file upload', () => {
     const dummyFormData = new FormData();
     dummyFormData.append('file', new Blob(['test content'], { type: 'text/plain' }), 'test.txt');
-
     service.uploadApplication(dummyFormData);
-
     const req = httpMock.expectOne(`${BASE_URL}job/upload`);
     expect(req.request.method).toBe('POST');
 

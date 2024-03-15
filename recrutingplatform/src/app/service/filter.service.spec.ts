@@ -63,7 +63,6 @@ describe('FilterService', () => {
     req.flush(updatedFilter);
   });
 
-
   it('deleteFilter should make DELETE request to remove a filter', () => {
     const filterToDelete = { _id: '1' };
 
@@ -72,5 +71,37 @@ describe('FilterService', () => {
     const req = httpTestingController.expectOne(`${BASE_URL}filter/${filterToDelete._id}`);
     expect(req.request.method).toEqual('DELETE');
     req.flush({});
+  });
+
+  it('should handle errors when getting filters', () => {
+    service.getFilters().subscribe(
+      () => fail('expected an error, not filters'),
+      error => expect(error).toBeTruthy()
+    );
+
+    const req = httpTestingController.expectOne(`${BASE_URL}filter/`);
+    req.flush('Error', { status: 500, statusText: 'Server Error' });
+  });
+
+  it('should handle errors when adding a filter', async () => {
+    const newFilter = { name: 'New Filter' };
+
+    service.addFilter(newFilter).catch(error => {
+      expect(error).toBeTruthy();
+    });
+
+    const req = httpTestingController.expectOne(`${BASE_URL}filter/`);
+    req.flush('Error', { status: 500, statusText: 'Server Error' });
+  });
+
+  it('should handle errors when updating a filter', async () => {
+    const updatedFilter = { _id: '1', name: 'Updated Filter' };
+
+    service.updateFilter(updatedFilter).catch(error => {
+      expect(error).toBeTruthy();
+    });
+
+    const req = httpTestingController.expectOne(`${BASE_URL}filter/${updatedFilter._id}`);
+    req.flush('Error', { status: 500, statusText: 'Server Error' });
   });
 });

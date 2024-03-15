@@ -114,6 +114,4 @@ describe('RegistrierungComponent', () => {
     expect(registrierungServiceMock.addUserAuthData).not.toHaveBeenCalled();
   });
 
-
-
 });
