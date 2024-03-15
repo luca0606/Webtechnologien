@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
 })
 export class BewerberlisteComponent {
   applicationList: any[];
-  fileName:string;
+  fileName: string;
   subscription: Subscription = new Subscription();
 
-  constructor(private applService: BewerberlisteService, private r: Router) {}
+  constructor(private applService: BewerberlisteService, private r: Router) { }
 
   ngOnInit() {
     // get user from data service
@@ -53,7 +53,7 @@ export class BewerberlisteComponent {
     this.buildApplList(); // Liste neu aufbauen, um die aktualisierten Daten anzuzeigen
   }
 
-  async download(fileName:string) {
-  await this.applService.downloadAppl(fileName);
+  async download(fileName: string) {
+    await this.applService.downloadAppl(fileName);
   }
 }

@@ -22,7 +22,7 @@ export class HeaderComponent {
     private dataService: DataService,
     private router: Router,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   abmelden() {
     this.authService.abmelden();
@@ -31,12 +31,12 @@ export class HeaderComponent {
   ngOnInit() {
     this.dataService.currentIsLoggedIn.subscribe((value) => {
       this.isLoggedIn = value;
-      // console.log("header", this.isLoggedIn)
-      this.cdr.detectChanges();
+      // this.cdr.detectChanges(); // removed this line for now maybe it will be needed later...
     });
     this.userSubscription = this.dataService.user$.subscribe((user) => {
       this.user = user;
     });
+
   }
 
   ngOnDestroy() {

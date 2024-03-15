@@ -12,7 +12,6 @@ describe('BewerbenService', () => {
       imports: [HttpClientTestingModule],
       providers: [BewerbenService]
     });
-
     service = TestBed.inject(BewerbenService);
     httpMock = TestBed.inject(HttpTestingController);
   });
@@ -21,19 +20,23 @@ describe('BewerbenService', () => {
     httpMock.verify();
   });
 
-  it('should send an application', () => {
-    const dummyApplication = {
-      bewerbung: 'Meine Bewerbung',
-      datei: new File([""], "resume.pdf", { type: "application/pdf" })
-    };
-
-    service.addApplication(dummyApplication.bewerbung, dummyApplication.datei);
-
-    const req = httpMock.expectOne(`${BASE_URL}user/`);
+  it('addApplication() should make POST request', () => {
+    const dummyApplication = { id: '123', status: 'pending' };
+    service.addApplication(dummyApplication);
+    const req = httpMock.expectOne(`${BASE_URL}application`);
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual(dummyApplication);
-
-    req.flush({ message: 'Application added successfully' });
+    req.flush(dummyApplication); // Simulate the server response
   });
 
+  it('uploadApplication() should make POST request for file upload', () => {
+    const dummyFormData = new FormData();
+    dummyFormData.append('file', new Blob(['test content'], { type: 'text/plain' }), 'test.txt');
+
+    service.uploadApplication(dummyFormData);
+
+    const req = httpMock.expectOne(`${BASE_URL}job/upload`);
+    expect(req.request.method).toBe('POST');
+
+    req.flush({ success: true });
+  });
 });
