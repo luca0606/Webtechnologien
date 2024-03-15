@@ -61,6 +61,7 @@ html{
   button[type="button"] {
     background-color: #007bff;
     color: white;
+    display: inline-block;
   }
 }
 
@@ -75,4 +76,7 @@ html{
       margin-bottom: 20px;
     }
   }
+}
+span{
+  display: inline-block;
 }

@@ -48,8 +48,8 @@
       <button type="button" (click)="onPressSave()" *ngIf="mode == 'edit'">Änderungen speichern</button>
       <button type="button" (click)="onPressDelete()" *ngIf="mode == 'edit'">Stelle löschen</button>
       <span *ngIf="successfulAdd">Stelle erfolgreich hinzugefügt!</span>
-      <span *ngIf="successfulEdit">Stelle erfolgreich hinzugefügt!</span>
-      <span *ngIf="successfulDeletion">Stelle erfolgreich hinzugefügt!</span>
+      <span *ngIf="successfulEdit">Stelle erfolgreich bearbeitet!</span>
+      <span *ngIf="successfulDeletion">Stelle erfolgreich gelöscht!</span>
     </form>
   
   </div>
